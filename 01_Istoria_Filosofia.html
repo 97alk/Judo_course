@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ενότητα 1: Ιστορία και Φιλοσοφία του Τζούντο και του Ζίου Ζίτσου</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap');
+
+  :root{
+    --ink:#262320;
+    --cream:#F6F1E8;
+    --cream-panel:#FFFFFF;
+    --burgundy:#6E1F2B;
+    --burgundy-deep:#4E1620;
+    --gold:#B98A3D;
+    --sage:#4C6B5A;
+    --sage-panel:#EEF3F0;
+    --line: rgba(38,35,32,0.12);
+    --radius: 14px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+
+  header.mod{
+    background:var(--burgundy);
+    background-image: radial-gradient(circle at 85% 20%, rgba(255,255,255,0.06), transparent 55%);
+    color:#fff;
+    padding:44px 24px 32px;
+  }
+  header.mod .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:#E8C98F;
+    margin:0 0 10px;
+  }
+  header.mod h1{
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    font-size:clamp(28px,5vw,40px);
+    margin:0 0 8px;
+    letter-spacing:-0.01em;
+  }
+  header.mod .sub{
+    color:#E9D9CE; font-size:15.5px; margin:0 0 22px; max-width:560px;
+  }
+  header.mod .meta{
+    display:flex; gap:18px; font-family:'JetBrains Mono', monospace;
+    font-size:12px; color:rgba(255,255,255,0.75); margin-bottom:20px;
+    letter-spacing:0.04em;
+  }
+  .belt-track{
+    max-width:760px;margin:0 auto;
+    display:flex; gap:5px; align-items:center;
+  }
+  .belt-stripe{
+    height:7px; flex:1; border-radius:4px;
+    background: rgba(255,255,255,0.18);
+  }
+  .belt-stripe.current{background:var(--gold);}
+  .belt-track .lbl{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px; color:rgba(255,255,255,0.75);
+    margin-top:8px; letter-spacing:0.04em;
+  }
+
+  section{padding:44px 0 0;}
+  section h2{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:25px;
+    margin:0 0 6px;
+    color:var(--burgundy-deep);
+  }
+  section .kicker{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--gold); margin:0 0 8px; font-weight:600;
+  }
+  p{margin:0 0 16px; font-size:16px;}
+  ul.points{margin:12px 0 16px; padding-left:0; list-style:none;}
+  ul.points li{
+    position:relative; padding-left:28px; margin-bottom:12px; font-size:16px;
+  }
+  ul.points li::before{
+    content:"";
+    position:absolute; left:0; top:9px;
+    width:9px; height:9px; border-radius:2px;
+    background:var(--gold);
+    transform:rotate(45deg);
+  }
+
+  .objectives{
+    background:var(--cream-panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:26px 28px;
+    margin-bottom:8px;
+  }
+  .objectives .obj-item{
+    display:flex; gap:14px; align-items:flex-start;
+    padding:12px 0; border-bottom:1px solid var(--line);
+  }
+  .objectives .obj-item:last-child{border-bottom:none; padding-bottom:0;}
+  .objectives .obj-item:first-child{padding-top:0;}
+  .objectives .check{
+    flex:0 0 22px; height:22px; border-radius:50%;
+    background:var(--sage-panel); color:var(--sage);
+    display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:700; margin-top:1px;
+  }
+  .objectives .obj-item p{margin:0; font-size:15.5px;}
+
+  .agenda{margin:6px 0 8px;}
+  .agenda-item{
+    display:flex; align-items:center; gap:16px;
+    background:var(--cream-panel);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:14px 18px; margin-bottom:8px;
+  }
+  .agenda-item .num{
+    font-family:'Fraunces', serif; font-weight:700; font-size:20px;
+    color:var(--gold); flex:0 0 30px;
+  }
+  .agenda-item .txt{flex:1; font-size:15px;}
+  .agenda-item .time{
+    font-family:'JetBrains Mono', monospace; font-size:13px;
+    color:var(--sage); background:var(--sage-panel);
+    padding:4px 10px; border-radius:100px; flex:0 0 auto;
+  }
+
+  .content-block{margin-bottom:36px;}
+  .visual-note{
+    display:flex; align-items:center; gap:10px;
+    background:var(--sage-panel); color:var(--sage);
+    border:1px dashed var(--sage);
+    border-radius:10px; padding:14px 16px; font-size:14px;
+    margin-top:6px;
+  }
+
+  .nuance{
+    display:flex; gap:12px; align-items:flex-start;
+    background:#FBF3E3; border:1px solid var(--gold);
+    border-radius:10px; padding:16px 18px; margin-top:14px;
+  }
+  .nuance .mark{
+    flex:0 0 22px; font-size:17px; line-height:1.3; color:var(--gold);
+  }
+  .nuance p{margin:0; font-size:14.5px; color:#5B4A2A; line-height:1.55;}
+  .nuance p strong{color:#4A3A1E;}
+  .nuance .src{
+    display:block; margin-top:6px; font-family:'JetBrains Mono', monospace;
+    font-size:12px; color:#8A7040;
+  }
+
+  .discussion{
+    background:var(--burgundy-deep);
+    color:#fff;
+    border-radius:var(--radius);
+    padding:30px 30px 26px;
+    margin:16px 0 8px;
+  }
+  .discussion h2{color:#fff;}
+  .discussion .kicker{color:#E8C98F;}
+  .discussion .prompt{
+    font-family:'Fraunces', serif; font-size:19px; font-style:italic;
+    color:#F3E7D9; margin:14px 0 22px; line-height:1.5;
+  }
+  .discussion .step{
+    display:flex; gap:14px; align-items:flex-start; margin-bottom:14px;
+  }
+  .discussion .step .snum{
+    flex:0 0 26px; height:26px; border-radius:50%;
+    background:var(--gold); color:var(--burgundy-deep);
+    display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:700;
+  }
+  .discussion .step p{margin:0; color:#E9D9CE; font-size:15px;}
+
+  .key-concept{
+    background:var(--cream-panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:28px 28px 24px;
+    box-shadow:0 1px 2px rgba(0,0,0,0.03);
+    margin:8px 0 8px;
+  }
+  .key-concept .tag{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--burgundy-deep); color:#fff;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px; font-weight:500; letter-spacing:0.06em;
+    text-transform:uppercase;
+    padding:7px 14px; border-radius:100px;
+    margin-bottom:16px;
+  }
+  .key-concept ul.points{margin:0;}
+  .key-concept ul.points li:last-child{margin-bottom:0;}
+
+  .quiz{
+    background:var(--cream-panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:26px 28px 24px;
+    margin:16px 0 28px;
+  }
+  .quiz .q-num{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px; color:var(--sage); letter-spacing:0.08em;
+    text-transform:uppercase; margin-bottom:6px;
+  }
+  .quiz .q-text{font-weight:600; font-size:16.5px; margin-bottom:16px;}
+  .opt{
+    display:block; width:100%; text-align:left;
+    background:var(--cream); border:1px solid var(--line);
+    border-radius:10px; padding:13px 16px; margin-bottom:10px;
+    font-family:'Inter',sans-serif; font-size:15px; color:var(--ink);
+    cursor:pointer; transition:border-color .15s, background .15s;
+  }
+  .opt:hover{border-color:var(--gold);}
+  .opt.correct{background:#EBF2ED; border-color:var(--sage); color:var(--sage); font-weight:600;}
+  .opt.incorrect{background:#F7E9E7; border-color:#B34A3B; color:#8C382C; font-weight:600;}
+  .opt[disabled]{cursor:default;}
+  .feedback{
+    margin-top:10px; font-size:14.5px; padding:12px 14px;
+    border-radius:8px; display:none;
+  }
+  .feedback.show{display:block;}
+  .feedback.ok{background:#EBF2ED; color:var(--sage);}
+  .feedback.no{background:#F7E9E7; color:#8C382C;}
+
+  .faq{margin:6px 0 8px;}
+  .faq-item{
+    background:var(--cream-panel);
+    border:1px solid var(--line);
+    border-radius:10px;
+    margin-bottom:10px;
+    overflow:hidden;
+  }
+  .faq-item summary{
+    list-style:none;
+    cursor:pointer;
+    padding:16px 20px;
+    font-weight:600;
+    font-size:15.5px;
+    color:var(--burgundy-deep);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+  }
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary::after{
+    content:"+";
+    font-family:'JetBrains Mono', monospace;
+    font-size:20px;
+    color:var(--gold);
+    flex:0 0 auto;
+    transition:transform .15s;
+  }
+  .faq-item[open] summary::after{ transform:rotate(45deg); }
+  .faq-item .faq-body{
+    padding:0 20px 18px;
+    font-size:15px;
+    color:var(--ink);
+  }
+  .faq-item .faq-body p{margin:0 0 10px;}
+  .faq-item .faq-body p:last-child{margin-bottom:0;}
+
+  .sources{margin:6px 0 8px;}
+  .source-item{
+    display:flex; gap:14px;
+    background:var(--cream-panel);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:16px 18px;
+    margin-bottom:10px;
+  }
+  .source-item .snum2{
+    flex:0 0 24px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px; font-weight:700; color:var(--gold);
+  }
+  .source-item .sbody a{
+    color:var(--burgundy-deep);
+    font-weight:600;
+    font-size:15px;
+    text-decoration:none;
+    border-bottom:1px solid var(--gold);
+  }
+  .source-item .sbody a:hover{ color:var(--burgundy); }
+  .source-item .sbody .spublisher{
+    display:block; font-size:13px; color:var(--sage);
+    margin-top:2px; font-family:'JetBrains Mono', monospace;
+  }
+  .source-item .sbody .snote{
+    display:block; font-size:13.5px; color:var(--ink);
+    margin-top:6px; opacity:0.85;
+  }
+  .sources-addnote{
+    font-family:'JetBrains Mono', monospace; font-size:12px;
+    color:var(--sage); background:var(--sage-panel);
+    border:1px dashed var(--sage); border-radius:10px;
+    padding:12px 16px; margin-top:6px;
+  }
+
+  .ask{
+    background:var(--burgundy-deep);
+    color:#fff;
+    border-radius:var(--radius);
+    padding:32px 30px;
+    margin-top:36px;
+  }
+  .ask h2{color:#fff; margin-bottom:8px;}
+  .ask p.sub2{color:#E9D9CE; font-size:15px; margin-bottom:20px;}
+  .ask .form-frame-holder{
+    background:#fff; border-radius:10px; overflow:hidden;
+    min-height:420px;
+  }
+  .ask .form-frame-holder iframe{
+    display:block; width:100%; height:420px; border:0;
+  }
+
+  .closing{
+    text-align:center; padding:40px 20px; margin-top:8px;
+    border-top:1px solid var(--line);
+  }
+  .closing p.next-label{
+    font-family:'JetBrains Mono', monospace; font-size:12px;
+    letter-spacing:0.1em; text-transform:uppercase; color:var(--gold);
+    margin-bottom:8px;
+  }
+  .closing p.next-title{
+    font-family:'Fraunces', serif; font-size:20px; font-weight:600;
+    color:var(--burgundy-deep); margin:0;
+  }
+
+  footer.pagefoot{
+    text-align:center; padding:24px 0 0; color:rgba(38,35,32,0.5);
+    font-size:13px; font-family:'JetBrains Mono', monospace;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+  }
+
+  /* ---- Sticky mini-nav ---- */
+  .mininav{
+    position:sticky; top:0; z-index:20;
+    background:rgba(246,241,232,0.94);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .mininav-inner{
+    max-width:760px; margin:0 auto; padding:0 24px;
+    display:flex; gap:4px; overflow-x:auto;
+    -ms-overflow-style:none; scrollbar-width:none;
+  }
+  .mininav-inner::-webkit-scrollbar{display:none;}
+  .mininav a{
+    flex:0 0 auto;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px; letter-spacing:0.03em;
+    color:var(--ink); opacity:0.65;
+    text-decoration:none;
+    padding:12px 10px;
+    border-bottom:2px solid transparent;
+    white-space:nowrap;
+  }
+  .mininav a:hover{ opacity:1; border-bottom-color:var(--gold); }
+
+  /* ---- Timeline ---- */
+  .timeline{ position:relative; margin:20px 0 8px; padding-left:26px; }
+  .timeline::before{
+    content:""; position:absolute; left:6px; top:6px; bottom:6px;
+    width:2px; background:var(--line);
+  }
+  .tl-item{ position:relative; padding-bottom:26px; }
+  .tl-item:last-child{ padding-bottom:0; }
+  .tl-item::before{
+    content:""; position:absolute; left:-26px; top:3px;
+    width:13px; height:13px; border-radius:50%;
+    background:var(--gold); border:3px solid var(--cream);
+    box-shadow:0 0 0 1px var(--gold);
+  }
+  .tl-year{
+    font-family:'JetBrains Mono', monospace; font-size:12.5px;
+    font-weight:700; color:var(--gold); letter-spacing:0.04em;
+    margin-bottom:3px;
+  }
+  .tl-title{
+    font-family:'Fraunces', serif; font-weight:600; font-size:17px;
+    color:var(--burgundy-deep); margin:0 0 4px;
+  }
+  .tl-body{ font-size:15px; margin:0; color:var(--ink); }
+  .tl-body p{ margin:0 0 4px; font-size:15px; }
+
+  /* ---- Nuance as collapsible <details> ---- */
+  details.nuance{ padding:0; overflow:hidden; }
+  details.nuance summary{
+    list-style:none; cursor:pointer;
+    display:flex; gap:10px; align-items:center;
+    padding:14px 18px; font-weight:600; font-size:14.5px; color:#4A3A1E;
+  }
+  details.nuance summary::-webkit-details-marker{ display:none; }
+  details.nuance summary::after{
+    content:"+"; margin-left:auto; font-family:'JetBrains Mono', monospace;
+    font-size:18px; color:var(--gold); transition:transform .15s;
+  }
+  details.nuance[open] summary::after{ transform:rotate(45deg); }
+  details.nuance .nuance-body{ padding:0 18px 16px 46px; }
+  details.nuance .nuance-body p{ margin:0; font-size:14.5px; color:#5B4A2A; line-height:1.55; }
+  details.nuance .nuance-body .src{
+    display:block; margin-top:8px; font-family:'JetBrains Mono', monospace;
+    font-size:12px; color:#8A7040;
+  }
+
+  /* ---- Scenario check (philosophy sections) ---- */
+  .scenario{
+    background:var(--sage-panel); border:1px solid var(--sage);
+    border-radius:10px; padding:18px 20px; margin-top:16px;
+  }
+  .scenario .stitle{
+    font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:0.08em;
+    text-transform:uppercase; color:var(--sage); font-weight:700; margin-bottom:8px;
+  }
+  .scenario p.scase{ font-size:15px; margin:0 0 10px; }
+  .scenario details{ margin-top:6px; }
+  .scenario summary{
+    cursor:pointer; font-weight:600; font-size:14px; color:var(--sage);
+    list-style:none;
+  }
+  .scenario summary::-webkit-details-marker{ display:none; }
+  .scenario summary::before{ content:"▸ "; }
+  .scenario details[open] summary::before{ content:"▾ "; }
+  .scenario .sanswer{ font-size:14.5px; margin-top:8px; color:#33473C; }
+
+  /* ---- Compare table ---- */
+  .compare{
+    width:100%; border-collapse:collapse; margin:14px 0 8px;
+    font-size:14.5px; background:var(--cream-panel);
+    border:1px solid var(--line); border-radius:var(--radius); overflow:hidden;
+  }
+  .compare th, .compare td{ padding:12px 14px; text-align:left; border-bottom:1px solid var(--line); }
+  .compare th{
+    font-family:'JetBrains Mono', monospace; font-size:11.5px; letter-spacing:0.05em;
+    text-transform:uppercase; color:#fff; background:var(--burgundy-deep);
+  }
+  .compare td:first-child, .compare th:first-child{ font-weight:600; color:var(--burgundy-deep); width:34%; }
+  .compare tr:last-child td{ border-bottom:none; }
+
+  /* ---- Inline checkpoint label ---- */
+  .checkpoint-kicker{
+    font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--sage); margin:0 0 8px; font-weight:700;
+  }
+
+  /* ---- Discussion: alt prompts & keyword chips ---- */
+  .discussion .prompt-label{
+    font-family:'JetBrains Mono', monospace; font-size:11.5px; letter-spacing:0.06em;
+    text-transform:uppercase; color:var(--gold); margin:18px 0 4px; font-weight:700;
+  }
+  .discussion .prompt-label:first-of-type{ margin-top:6px; }
+  .discussion .keywords{
+    margin-top:20px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.15);
+  }
+  .discussion .kw-title{
+    font-family:'JetBrains Mono', monospace; font-size:11.5px; letter-spacing:0.06em;
+    text-transform:uppercase; color:#E8C98F; margin:0 0 10px; font-weight:700;
+  }
+  .discussion .kw-list{ display:flex; flex-wrap:wrap; gap:8px; }
+  .discussion .kw-chip{
+    font-family:'JetBrains Mono', monospace; font-size:12.5px;
+    background:rgba(255,255,255,0.1); color:#F3E7D9;
+    border:1px solid rgba(255,255,255,0.25); border-radius:100px;
+    padding:5px 12px;
+  }
+</style>
+</head>
+<body>
+
+<header class="mod">
+  <div class="wrap" style="padding:0;">
+    <p class="eyebrow">Ενότητα 1 / 8</p>
+    <h1>Ιστορία και Φιλοσοφία του Τζούντο και του Ζίου Ζίτσου</h1>
+    <p class="sub">Από τις πρώτες σχολές Ju-Jitsu στο σύγχρονο αγωνιστικό Judo/BJJ</p>
+    <div class="meta">
+      <span>⏱ 2 ώρες</span>
+      <span>📖 Σύγχρονη διάλεξη</span>
+    </div>
+    <div class="belt-track">
+      <div class="belt-stripe current"></div>
+      <div class="belt-stripe"></div>
+      <div class="belt-stripe"></div>
+      <div class="belt-stripe"></div>
+      <div class="belt-stripe"></div>
+      <div class="belt-stripe"></div>
+      <div class="belt-stripe"></div>
+      <div class="belt-stripe"></div>
+    </div>
+    <p class="lbl">ΕΝΟΤΗΤΑ 1 ΑΠΟ 8</p>
+  </div>
+</header>
+
+<nav class="mininav">
+  <div class="mininav-inner">
+    <a href="#stoxoi">Στόχοι</a>
+    <a href="#arxi">Η Αρχή</a>
+    <a href="#kano-xronologio">Ο Kano</a>
+    <a href="#filosofia">Φιλοσοφία</a>
+    <a href="#maeda">Maeda &amp; BJJ</a>
+    <a href="#simera">Σήμερα</a>
+    <a href="#erevna">Έρευνα</a>
+    <a href="#faq">FAQ</a>
+  </div>
+</nav>
+
+<div class="wrap">
+<section id="stoxoi">
+  <h2>Μαθησιακοί Στόχοι</h2>
+  <p>Με την ολοκλήρωση του μαθήματος, οι μαθητές/τριες θα μπορούν να:</p>
+  <div class="objectives">
+    <div class="obj-item">
+      <div class="check">✓</div>
+      <p>Περιγράφουν την εξέλιξη του Jiu-Jitsu και του Τζούντο. Άπό τις πρώτες σχολές Jiu-Jitsu στο Kodokan της Ιαπωνίας και του Jigoro Kano.</p>
+    </div>
+    <div class="obj-item">
+      <div class="check">✓</div>
+      <p>Εξηγούν τις αρχές <em>Seiryoku Zen'yo</em> και <em>Jita Kyoei</em> και τη σύγχρονη σημασία τους.</p>
+    </div>
+    <div class="obj-item">
+      <div class="check">✓</div>
+      <p>Συνδέουν την ιστορική διαδρομή του Judo και του Jiu-Jitsu με τη σημερινή πρακτική και των δύο.</p>
+    </div>
+    <div class="obj-item">
+      <div class="check">✓</div>
+      <p>Αναγνωρίζουν τη μακρά παράδοση του Judo ως αντικείμενο επιστημονικής μελέτης.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Δομή Ενότητας</h2>
+  <div class="agenda">
+    <div class="agenda-item"><span class="num">01</span><span class="txt">Καλωσόρισμα και γνωριμία</span><span class="time">15'</span></div>
+    <div class="agenda-item"><span class="num">02</span><span class="txt">Η Αρχή: Πρώτες σχολές Ju-Jitsu</span><span class="time">20'</span></div>
+    <div class="agenda-item"><span class="num">03</span><span class="txt">Jigoro Kano: βιογραφία, φιλοσοφία, αρχές και εκπαιδευτικό όραμα</span><span class="time">25'</span></div>
+    <div class="agenda-item"><span class="num">04</span><span class="txt">Από το Judo στο Jiu-Jitsu: Maeda, οικογένεια Gracie, BJJ</span><span class="time">25'</span></div>
+    <div class="agenda-item"><span class="num">05</span><span class="txt">Σύγχρονες τάσεις: άθλημα, αυτοάμυνα, παιδεία</span><span class="time">20'</span></div>
+    <div class="agenda-item"><span class="num">06</span><span class="txt">Συζήτηση ομάδας &amp; ερωτήσεις</span><span class="time">15'</span></div>
+  </div>
+</section>
+
+<section class="content-block">
+  <p class="kicker">Καλωσόρισμα και γνωριμία</p>
+  <h2>Γαβριηλίδου Άλκηστις</h2>
+  <ul class="points">
+    <li>BSc, MSc ΤΕΦΑΑ ΑΠΘ, Υποψήφια Διδάκτωρ - University of Copenhagen, Ερευνητικό πεδίο: Κινητικός Έλεγχος</li>
+    <li>Προπονήτρια Τζούντο κατηγορίας Α' (ειδικότητα ΤΕΦΑΑ)</li>
+    <li>Τζούντο μαύρη ζώνη, 2ο νταν</li>
+    <li>BJJ μπλε ζώνη</li>
+    <li>Διακρίσεις σε National Championships σε Ελλάδα και Δανία, διακρίσεις σε διεθνή πρωταθλήματα.</li>
+    <li>10ετής εμπειρία στην προπονητική αναπτυξιακών ηλικιών, σε Ελλάδα και Δανία, σε σχολεία, ΚΔΑΠ, και συλλόγους judo και bjj.</li>
+    <li>Εν ενεργεία προπονήτρια bjj (Hive bjj, Κοπεγχάγη) και εν ενεργεία αθλήτρια bjj (Πρωταθλήτρια Δανίας, μπλε ζώνη).</li>
+  </ul>
+</section>
+
+<section class="content-block" id="arxi">
+  <p class="kicker">Η Αρχή</p>
+  <h2>Πρώτες σχολές Ju-Jitsu (Koryu)</h2>
+  <ul class="points">
+    <li>Πλαίσιο εποχής Edo, πολεμικές τέχνες και σαμουράι.</li>
+    <li>Βασικά ryu που επηρέασαν το Judo (π.χ. Tenjin Shin'yo, Kito).</li>
+    <li>Τεχνικός προσανατολισμός: συνδυασμός ένοπλης και άοπλης πάλης.</li>
+  </ul>
+  <figure style="max-width: 400px; margin: 12px 0;">
+    <img src="29b0fbee03262aa39c2708c36f4b680e-3961823392.jpg" alt="Σαμουράι της εποχής Edo" style="width: 100%; height: 400px; object-fit: cover; border-radius: 8px;">
+    <figcaption style="font-family: 'Georgia', serif; font-style: italic; font-size: 14px; color: #555; margin-top: 6px;">
+      Σαμουράι της εποχής Edo
+    </figcaption>
+  </figure>
+</section>
+
+<section class="content-block" id="kano-xronologio">
+  <p class="kicker">Βιογραφία</p>
+  <h2>Jigoro Kano: Από το μικρόσωμο παιδί στον ιδρυτή του Kodokan</h2>
+
+  <figure style="max-width: 220px; margin: 0 0 16px 20px; float: right;">
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Jigoro-Kano-BW-4375px.jpg" alt="Πορτρέτο του Jigoro Kano" style="width: 100%; border-radius: 8px;">
+    <figcaption style="font-family: 'Georgia', serif; font-style: italic; font-size: 13px; color: #555; margin-top: 6px;">
+      Jigoro Kano (1860–1938)
+    </figcaption>
+  </figure>
+
+  <p>Η διαδρομή του Kano από ένα μικρόσωμο έως τον ιδρυτή ενός παγκόσμιου εκπαιδευτικού συστήματος καλύπτει μόλις 22 χρόνια. Το χρονολόγιο παρακάτω παρουσιάζει τις στιγμές-κλειδιά. Άνοιξε τα «+» για το ιστορικό πλαίσιο πίσω από κάθε γεγονός.</p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-year">1860</div>
+      <div class="tl-title">Γέννηση στο Mikage</div>
+      <div class="tl-body"><p>Γεννιέται στις 28 Οκτωβρίου 1860 κοντά στο Kobe, στο τέλος της φεουδαρχικής εποχής του Shogunate. Μεγαλώνει με κλασική ιαπωνική/κινεζική εκπαίδευση βασισμένη σε νεο-κομφουκιανές αξίες. Άπο  7 χρονών διαβάζει Κομφούκιο, από τα 8 απολαμβάνει ήδη να διδάσκει άλλα παιδιά.</p></div>
+      <details class="nuance">
+        <summary><span class="mark">📜</span> Παράδοση &amp; νεωτερικότητα</summary>
+        <div class="nuance-body">
+          <p>Ο Kano μεγάλωσε σε μια εποχή έντονων ανακατατάξεων. Άνοιγμα των ιαπωνικών λιμανιών (όπως το Kobe το 1867) σε ξένες δυνάμεις, κατάρρευση του Shogunate, γέννηση της σύγχρονης Ιαπωνίας το 1868 (περίοδος Meiji, όταν ο Kano ήταν 8 ετών). Κατάφερε να συνδυάσει την παραδοσιακή του ανατροφή με μια εξαιρετικά μοντέρνα εκπαιδευτική οπτική.
+          <span class="src">IJF.org, «Jigoro Kano, Who Was He Really? A Young Man (1)»</span></p>
+        </div>
+      </details>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1870</div>
+      <div class="tl-title">Ο θάνατος της μητέρας του &amp; η μετακόμιση στο Τόκυο</div>
+      <div class="tl-body"><p>Χάνει τη μητέρα του, Sadako, στα 10 του. Η οικογένεια μετακομίζει στο Edo (Τόκυο), όπου λαμβάνει ιδιωτική εκπαίδευση αντί για τα κοινά σχολεία της εποχής, και στα 14 ξεκινά αγγλικά με ξένους δασκάλους.</p></div>
+      <details class="nuance">
+        <summary><span class="mark">💭</span> Η αφορμή</summary>
+        <div class="nuance-body">
+          <p>Παρά την πλούσια οικογενειακή κληρονομιά, ο νεαρός Kano υπέφερε λόγω του μικρόσωμου παρουσιαστικού του και του σχολικού εκφοβισμού που δεχόταν. Αυτό τον οδήγησε στην ανάγκη να μάθει να υπερασπίζεται τον εαυτό του, γεγονός που θα τον έφερνε, λίγο αργότερα, στην πόρτα του jūjutsu.
+          <span class="src">IJF.org, «Jigoro Kano, Who Was He Really? - A Boiling Cradle (2)»</span></p>
+        </div>
+      </details>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1877</div>
+      <div class="tl-title">Η ανακάλυψη του Jūjutsu</div>
+      <div class="tl-body"><p>Μέσω γνωριμίας βρίσκει τον πρώτο του δάσκαλο, τον Fukuda Hachinosuke, και αρχίζει να φοιτά στο μικρό του dojo (σχολή Tenjin Shin'yō-ryū). Πολύ γρήγορα αντιλαμβάνεται ότι πίσω από την καθαρά πολεμική διάσταση του jūjutsu κρύβεται μια «Οδός» (Do) πέρα από την τεχνική.</p></div>
+      <details class="nuance">
+        <summary><span class="mark">⚔</span> Samurai vs Bushi</summary>
+        <div class="nuance-body">
+          <p>Συχνή σύγχυση: οι Samurai ήταν η πολεμική τάξη που κυβέρνησε την Ιαπωνία για σχεδόν 700 χρόνια, ενώ οι Bushi ήταν κυρίως έφιπποι πολεμιστές με βασικό όπλο το τόξο (yumi), προστάτες των οικογενειακών κλαν (uji). Και οι δύο ανέπτυξαν τεχνικές πάλης, αλλά το jūjutsu θεωρούνταν «κατώτερο» σε σχέση με τη χρήση ξίφους.
+          <span class="src">IJF.org, «Jigoro Kano, Who Was He Really? - When Kano Discovers Martial Arts (3)»</span></p>
+        </div>
+      </details>
+      <figure style="max-width: 180px; margin: 12px 0 0 16px; float: right;">
+        <img src="81tep5qREZL._SL1500_-4266184424.jpg" alt="Ο κώδικας ηθικής των Bushi" style="width: 100%; height: 230px; object-fit: cover; border-radius: 8px;">
+        <figcaption style="font-family: 'Georgia', serif; font-style: italic; font-size: 12.5px; color: #555; margin-top: 6px;">Ο κώδικας ηθικής των Bushi</figcaption>
+      </figure>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1877–1881</div>
+      <div class="tl-title">Δύο σχολές, μία σύνθεση</div>
+      <div class="tl-body"><p>Σπουδάζει πρώτα Tenjin Shin'yō-ryū (πάνω από 130 kata) με τον Fukuda και μετά τον Iso Masatomo. Μετά τον θάνατο των δασκάλων του στρέφεται στην Kitō-ryū, πιο φιλοσοφική, με δάσκαλο τον Iikubo Tsunetoshi. Τεχνικές θεμελιώδεις στο σημερινό judo (seoi-nage, harai-goshi, o-soto-gari) έχουν τις ρίζες τους σε αυτά τα χρόνια.</p></div>
+      <details class="nuance">
+        <summary><span class="mark">🥋</span> Δύο σχολές, ένα σύστημα</summary>
+        <div class="nuance-body">
+          <p>Οι δύο σχολές που σπούδασε ο Kano αποτέλεσαν τα δύο βασικά συστατικά που αργότερα συνδύασε για να δημιουργήσει το δικό του σύστημα.
+          <span class="src">IJF.org, «Jigoro Kano, Who Was He Really? - Perfecting the Practice (4)»</span></p>
+        </div>
+      </details>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1882</div>
+      <div class="tl-title">Η σύνθεση-Γέννηση του Kōdōkan</div>
+      <div class="tl-body"><p>Μόλις 22 ετών, ιδρύει το «Kanō Juku» στο ναό Eishoji, πριν καθιερώσει επίσημα το όνομα Kōdōkan τον Μάιο του 1882, με μόλις 9 μαθητές. Το «επαναστατικό» του βήμα: ανοίγει την τέχνη σε όσο το δυνατόν περισσότερο κόσμο, με εκπαιδευτικό και όχι πολεμικό σκοπό. Γιατί «Judo» και όχι «Jūjutsu»; Kōdōkan: «kō» = διδασκαλία, «dō» = ο δρόμος, «kan» = αίθουσα → «Ένα μέρος για να μελετάς τον δρόμο».</p></div>
+      <details class="nuance">
+        <summary><span class="mark">🔬</span> Το Judo ως «επιστήμη»</summary>
+        <div class="nuance-body">
+          <p>Ο ίδιος ο Kano συνέλεξε ιστορικά κείμενα και χειρόγραφα, συζητούσε με δασκάλους, και σύγκρινε στυλ jūjutsu συστηματικά πριν καταλήξει στη σύνθεσή του. Σε διάλεξη του 1889 αναφέρθηκε στο judo ως «alpha επιστήμη». Τη βασική αρχή της σύνθεσής του την ονόμασε <em>ju-no-ri</em>: αποφυγή απευθείας αντίστασης στη δύναμη του αντιπάλου, αξιοποιώντας την αντ' αυτού προς όφελός σου.
+          <span class="src">Callan (2018), «Scientific research in judo: a potted history» · Bennett (2009), Jigoro Kano and the Kodokan</span></p>
+        </div>
+      </details>
+    </div>
+  </div>
+  <div style="clear: both;"></div>
+</section>
+
+<section>
+  <p class="checkpoint-kicker">⏸ Στάσου και σκέψου</p>
+  <div class="quiz" id="q0">
+    <p class="q-num">Έλεγχος κατανόησης</p>
+    <p class="q-text">Σε ποιο έτος ίδρυσε επίσημα ο Kano το Kōdōkan;</p>
+    <button class="opt" data-correct="false">1877</button>
+    <button class="opt" data-correct="true">1882</button>
+    <button class="opt" data-correct="false">1889</button>
+    <div class="feedback"></div>
+  </div>
+</section>
+
+<section class="content-block" id="filosofia">
+  <p class="kicker">Φιλοσοφία</p>
+  <h2>Seiryoku Zen'yo - Μέγιστη Αποδοτικότητα</h2>
+
+  <figure style="max-width: 260px; margin: 0 0 12px 20px; float: right;">
+    <img src="tumblr_o15ajz3lq01tfrx5ho1_640-2229223316.jpg" alt="Seiryoku Zen'yo - Μέγιστη Αποδοτικότητα" style="width: 100%; height: 200px; border-radius: 8px;">
+  </figure>
+
+  <p>Το <em>Seiryoku Zen'yo</em> (精力善用) σημαίνει «καλή χρήση της πνευματικής και σωματικής δύναμης» - στη Δύση αποδίδεται ως «μέγιστη αποτελεσματικότητα με ελάχιστη προσπάθεια». Ο Kano το είδε ως θεμέλιο λίθο του judo, τεχνικά και ηθικά.</p>
+
+  <ul class="points">
+    <li><strong>Τεχνικό παράδειγμα:</strong> αντί να αντιμετωπίζεις τη δύναμη του αντιπάλου με δύναμη, χρησιμοποιείς <em>kuzushi</em> (διατάραξη ισορροπίας) για να τον ρίξεις με ελάχιστη προσπάθεια.</li>
+    <li><strong>Στην προπόνηση σήμερα:</strong> μία μαθήτρια που «παλεύει» με τη δύναμη σε κάθε τεχνική δεν εφαρμόζει Seiryoku Zen'yo, ακόμα κι αν πετυχαίνει τη ρίψη.</li>
+    <li><strong>Συχνή παρανόηση:</strong> «αποδοτικότητα» δεν σημαίνει τεμπελιά· σημαίνει στοχευμένη προσπάθεια εκεί που πραγματικά αποδίδει.</li>
+  </ul>
+
+  <div class="scenario">
+    <p class="stitle">🥋 Σενάριο για συζήτηση</p>
+    <p class="scase">Μία ενήλικη αρχάρια προσπαθεί να ρίξει τον συμπαίκτη της σπρώχνοντάς τον με όλη της τη δύναμη, χωρίς επιτυχία. Πώς θα της εξηγούσες το Seiryoku Zen'yo σε μία πρόταση;</p>
+    <details>
+      <summary>Δες μια πιθανή απάντηση</summary>
+      <p class="sanswer">«Μην αντιστέκεσαι στη δύναμή του. Βρες προς τα πού ήδη κινείται και βοήθησέ τον να πάει εκεί.» Ίδια αρχή πίσω από τα περισσότερα βασικά nage-waza.</p>
+    </details>
+  </div>
+
+  <div style="clear: both;"></div>
+</section>
+
+<section class="content-block">
+  <p class="kicker">Φιλοσοφία</p>
+  <h2>Jita Kyoei - Αμοιβαία Ευημερία</h2>
+
+  <p>Το <em>Jita Kyoei</em> (自他共栄), «ευημερία για τον εαυτό και τους άλλους μαζί», είναι η κοινωνική προέκταση του Seiryoku Zen'yo: αν η πρώτη αρχή αφορά το πώς χρησιμοποιείς τη δύναμή σου, η δεύτερη αφορά το γιατί: όχι για να επικρατήσεις, αλλά ώστε η εξέλιξή σου να ωφελεί και την αντίπαλό σου.</p>
+
+  <ul class="points">
+    <li><strong>Κοινωνική διάσταση:</strong> ο Kano σχεδίασε το judo ως εκπαιδευτικό εργαλείο. Η συμπαίκτριά σου στο randori δεν είναι εχθρός, είναι συνεργάτης στην εξέλιξή σου.</li>
+    <li><strong>Σύνδεση με το σήμερα:</strong> είναι η ίδια λογική πίσω από την έμφαση σε ασφάλεια και έλεγχο έντασης στο randori. Δεν είναι απλώς «κανόνες», είναι εφαρμογή της αρχής.</li>
+    <li><strong>Παράδειγμα στην τάξη:</strong> όταν διδάσκεις στα παιδιά να σέβονται τα όρια και τις δυνατότητες των συναθλητών τους. Όταν για παράδειγμα παλεύει μία μπλε ζώνη με μία κίτρινη ζώνη και η μπλε ζώνη γνωρίζει ότι θα πρέπει να μειώσει την ένταση του randori, εστιάζοντας για παράδειγμα στην τακτική. </li>
+  </ul>
+
+  <div class="scenario">
+    <p class="stitle">🥋 Σενάριο για συζήτηση</p>
+    <p class="scase">Δύο αθλήτριές σου παλεύουν στο randori με υπερβολική ένταση, σαν να είναι αγώνας. Ποια αρχή «παραβιάζεται» και πώς παρεμβαίνεις;</p>
+    <details>
+      <summary>Δες μια πιθανή απάντηση</summary>
+      <p class="sanswer">Παραβιάζεται το Jita Kyoei. Το randori έγινε μονόπλευρη επικράτηση αντί για αμοιβαία εξέλιξη. Υπενθύμισε τον σκοπό του (μάθηση και για τις δύο) και ρύθμισε την ένταση.</p>
+    </details>
+  </div>
+</section>
+
+<section>
+  <p class="checkpoint-kicker">⏸ Στάσου και σκέψου</p>
+  <div class="quiz" id="q1">
+    <p class="q-num">Έλεγχος κατανόησης</p>
+    <p class="q-text">Ποια αρχή του Kano αναφέρεται στη «μέγιστη αποδοτικότητα» της προσπάθειας;</p>
+    <button class="opt" data-correct="false">Jita Kyoei</button>
+    <button class="opt" data-correct="true">Seiryoku Zen'yo</button>
+    <button class="opt" data-correct="false">Randori Shugyo</button>
+    <div class="feedback"></div>
+  </div>
+</section>
+
+<section class="content-block" id="maeda">
+  <p class="kicker">Εξέλιξη</p>
+  <h2>Mitsuyo Maeda και η μετάβαση στη Βραζιλία</h2>
+
+  <figure style="max-width: 220px; margin: 0 0 16px 20px; float: right;">
+    <img src="https://en.wikipedia.org/wiki/Special:FilePath/Maeda_ca._1910.jpg" alt="Mitsuyo Maeda, περίπου 1910" style="width: 100%; border-radius: 8px;">
+    <figcaption style="font-family: 'Georgia', serif; font-style: italic; font-size: 13px; color: #555; margin-top: 6px;">
+      Mitsuyo Maeda, γνωστός και ως «Conde Koma» (περ. 1910)
+    </figcaption>
+  </figure>
+
+  <p>Ο Mitsuyo Maeda ήταν από τους πιο ταξιδεμένους judoka της «δεύτερης γενιάς» του Kodokan. ο Kano τον έστειλε στο εξωτερικό ως πρεσβευτή του judo, με αποστολή να δείχνει την τέχνη μέσα από προκλήσεις και επιδείξεις σε δεκάδες χώρες.</p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-year">1904–1908</div>
+      <div class="tl-title">Παγκόσμια περιοδεία</div>
+      <div class="tl-body"><p>Ο Maeda ταξιδεύει στις ΗΠΑ, στην Ευρώπια και στη Λατινική Αμερική, δίνοντας επιδείξεις και challenge matches για να προωθήσει το Kodokan judo, γνωστός στο κοινό ως «Conde Koma».</p></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">1914–1917</div>
+      <div class="tl-title">Άφιξη στη Βραζιλία &amp; γνωριμία με τους Gracie</div>
+      <div class="tl-body"><p>Εγκαθίσταται στη Βραζιλία και διδάσκει, μεταξύ άλλων, τον νεαρό Carlos Gracie. Η γνωριμία αυτή είναι το σημείο εκκίνησης της αφήγησης «Maeda → Gracie → BJJ».</p></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">1920s–1930s</div>
+      <div class="tl-title">Προσαρμογές στη Βραζιλία</div>
+      <div class="tl-body"><p>Η οικογένεια Gracie και άλλοι δάσκαλοι που μετέδωσαν το jiu-jitsu στη Βραζιλία, προσαρμόζουν σταδιακά τις τεχνικές, δίνοντας έμφαση στην πάλη εδάφους. Από αυτή τη διαδικασία προκύπτει το σύγχρονο Brazilian Jiu-Jitsu.</p></div>
+    </div>
+  </div>
+
+  <details class="nuance">
+    <summary><span class="mark">⚠</span> Μια πιο σύνθετη ιστορία</summary>
+    <div class="nuance-body">
+      <p>Η σύγχρονη ακαδημαϊκή έρευνα δείχνει ότι η «καθαρή» αφήγηση Maeda → Gracie δεν αντιστοιχεί ακριβώς στα ιστορικά στοιχεία. Υπήρχε ήδη δραστηριότητα jiu-jitsu στο Ρίο ντε Τζανέιρο από το 1908 και η οικογένεια Gracie δεν ήταν ο μόνος δρόμος διάδοσης της τέχνης στη Βραζιλία.
+      <span class="src">Lise &amp; Capraro (2018), Revista Brasileira de Ciências do Esporte · Cairus, Tempo e Argumento</span></p>
+    </div>
+  </details>
+
+  <div style="clear: both;"></div>
+</section>
+
+<section>
+  <p class="checkpoint-kicker">⏸ Στάσου και σκέψου</p>
+  <div class="quiz" id="q2">
+    <p class="q-num">Έλεγχος κατανόησης</p>
+    <p class="q-text">Ποιος εισήγαγε το Judo στη Βραζιλία, συμβάλλοντας στη δημιουργία του BJJ;</p>
+    <button class="opt" data-correct="false">Jigoro Kano</button>
+    <button class="opt" data-correct="true">Mitsuyo Maeda</button>
+    <button class="opt" data-correct="false">Helio Gracie</button>
+    <div class="feedback"></div>
+  </div>
+</section>
+
+<section class="content-block" id="simera">
+  <p class="kicker">Σήμερα</p>
+  <h2>Judo και BJJ: κοινή ρίζα, διαφορετικοί δρόμοι</h2>
+
+  <div style="display:flex; gap:12px; margin:14px 0;">
+    <figure style="flex:1; margin:0;">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Judo_throw.jpg" alt="Ρίψη στο judo" style="width:100%; height:160px; object-fit:cover; border-radius:8px;">
+      <figcaption style="font-family:'Georgia', serif; font-style:italic; font-size:12.5px; color:#555; margin-top:6px; text-align:center;">Judo: ρίψη</figcaption>
+    </figure>
+    <figure style="flex:1; margin:0;">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Brazilian_Jiu-jitsu_Kimura_lock_from_guard.jpg" alt="Τεχνική εδάφους στο BJJ" style="width:100%; height:160px; object-fit:cover; border-radius:8px;">
+      <figcaption style="font-family:'Georgia', serif; font-style:italic; font-size:12.5px; color:#555; margin-top:6px; text-align:center;">BJJ: πάλη εδάφους</figcaption>
+    </figure>
+  </div>
+
+  <p>Ίδιες ρίζες, δύο ξεχωριστά αθλήματα σήμερα, με διαφορετική έμφαση στους κανονισμούς:</p>
+
+  <table class="compare">
+    <tr><th>Στοιχείο</th><th>Judo</th><th>BJJ</th></tr>
+    <tr><td>Κύρια αρένα</td><td>Πάλη από όρθια θέση, ρίψεις</td><td>Πάλη εδάφους (ground game)</td></tr>
+    <tr><td>Νίκη με</td><td>Ippon (καθαρή ρίψη/ακινητοποίηση/υποταγή)</td><td>Submission ή πόντους σε θέση</td></tr>
+    <tr><td>Χρόνος στο έδαφος</td><td>Περιορισμένος (newaza με χρονικό όριο)</td><td>Απεριόριστος.</td></tr>
+    <tr><td>Στολή</td><td>Judogi, πιο ανθεκτικό/κοντό</td><td>Gi ή no-gi</td></tr>
+  </table>
+
+  <p><strong>Κοινά σημεία:</strong> kuzushi (διατάραξη ισορροπίας), έλεγχος θέσης, και η θεμελιώδης αρχή της μη-αντίστασης αξιοποίηση της κίνησης του αντιπάλου αντί για ωμή δύναμη.</p>
+
+  <p><strong>Γιατί έχει σημασία για μία προπονήτρια σήμερα:</strong> η ιστορική γνώση δείχνει ότι οι διαφορές δεν είναι «λάθη» παρέκκλισης, αλλά προσαρμογές σε διαφορετικά πλαίσια.</p>
+</section>
+
+<section class="content-block" id="erevna">
+  <p class="kicker">Έρευνα</p>
+  <h2>Το Judo ως αντικείμενο επιστημονικής μελέτης</h2>
+  <ul class="points">
+    <li><strong>1914:</strong> Το Kōdōkan ιδρύει το Judokai, με μηνιαίο περιοδικό «Judo». Περιλάμβανε επιστημονική στήλη για εκπαιδευτές.</li>
+    <li><strong>1922:</strong> Μετονομασία σε Kōdōkan Bunkakai (Πολιτιστικός Σύλλογος)· νέα έκδοση «Taisei», ένα από τα πρώτα ακαδημαϊκά περιοδικά για το judo.</li>
+    <li><strong>1932:</strong> Ιδρυτική συνάντηση της Ιατρικής Ερευνητικής Ομάδας Judo του Kōdōkan (9 γιατροί, 12 ερευνητικά πεδία). Η ομάδα υπάρχει ακόμη σήμερα.</li>
+    <li><strong>1989:</strong> Ίδρυση της European Society for the Scientific Study of Judo (Michel Brousse, Γαλλία).</li>
+    <li><strong>1999:</strong> Πρώτο Διεθνές Συμπόσιο Επιστήμης του Judo από την IJF, στο Παγκόσμιο Πρωτάθλημα του Birmingham.</li>
+    <li><strong>2007:</strong> Ίδρυση της International Association of Judo Researchers (IAJR) στο Ρίο ντε Τζανέιρο.</li>
+  </ul>
+  <details class="nuance">
+    <summary><span class="mark">🎓</span> Γιατί έχει σημασία για έναν/μία προπονήτρια</summary>
+    <div class="nuance-body">
+      <p>Το judo δεν εξελίχθηκε μόνο ως αθλητική πρακτική, αλλά και ως αντικείμενο συστηματικής επιστημονικής έρευνας εδώ και πάνω από 100 χρόνια. Η σύνδεση προπονητικής πρακτικής με έρευνα δεν είναι κάτι νέο· είναι μέρος της ταυτότητας του judo από την αρχή του.
+      <span class="src">Callan (2018), «Scientific research in judo: a potted history», i-dojo International Judo Research Unit, University of Hertfordshire</span></p>
+    </div>
+  </details>
+</section>
+
+<div class="discussion">
+  <p class="kicker">Συζήτηση</p>
+  <h2>Άθλημα, αυτοάμυνα, ή εκπαιδευτικό εργαλείο;</h2>
+
+  <p class="prompt-label">Επιλογή Α</p>
+  <p class="prompt">«Στη δική σας ομάδα, ποιος στόχος υπερισχύει σήμερα και πώς αυτό επηρεάζει το πρόγραμμα προπόνησης;»</p>
+
+  <p class="prompt-label">Επιλογή Β</p>
+  <p class="prompt">«Θα άλλαζε κάτι στη διδασκαλία σας αν εφαρμόζατε πιο συνειδητά το Jita Kyoei; Τι συγκεκριμένα;»</p>
+
+  <p class="prompt-label">Επιλογή Γ</p>
+  <p class="prompt">«Ένας γονιός σάς ρωτά γιατί το παιδί του κάνει judo αντί για κάποιο άλλο άθλημα. Τι θα απαντούσατε;»</p>
+
+  <div class="step"><span class="snum">1</span><p>Σχηματισμός μικρών ομάδων (3–4 άτομα).</p></div>
+  <div class="step"><span class="snum">2</span><p>Κάθε ομάδα καταγράφει 2 παραδείγματα από τη δική της εμπειρία.</p></div>
+  <div class="step"><span class="snum">3</span><p>Σύντομη παρουσίαση &amp; κοινή συζήτηση στην ολομέλεια.</p></div>
+
+  <div class="keywords">
+    <p class="kw-title">Λέξεις-κλειδιά για να κρατήσετε τη συζήτηση εστιασμένη</p>
+    <div class="kw-list">
+      <span class="kw-chip">Seiryoku Zen'yo</span>
+      <span class="kw-chip">Jita Kyoei</span>
+      <span class="kw-chip">kuzushi</span>
+      <span class="kw-chip">randori vs shiai</span>
+      <span class="kw-chip">ασφάλεια</span>
+      <span class="kw-chip">αυτοπεποίθηση</span>
+      <span class="kw-chip">πειθαρχία</span>
+      <span class="kw-chip">κοινότητα / dojo</span>
+    </div>
+  </div>
+</div>
+
+<section>
+  <h2>Βασικά Συμπεράσματα</h2>
+  <div class="key-concept">
+    <span class="tag">🔑 Key Takeaways</span>
+    <ul class="points">
+      <li>Το Judo και το BJJ ανήκουν στην ίδια οικογένεια. Η γνώση αυτή ενισχύει τη διεπιστημονική διδασκαλία.</li>
+      <li>Η γνώση της ιστορίας βοηθάει στην κατανόηση των αθλημάτων.</li>
+      <li>Οι αρχές του Kano αποτελούν εργαλείο καθοδήγησης στο σχεδιασμό προπόνησης.</li>
+      <li>Το judo έχει μακρά παράδοση ως αντικείμενο επιστημονικής έρευνας, όχι μόνο αθλητικής πρακτικής.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="faq">
+  <h2>Συχνές Ερωτήσεις</h2>
+  <div class="faq">
+
+    <details class="faq-item">
+      <summary>Ποια είναι η διαφορά ανάμεσα σε Judo και στο Jiu-Jitsu;</summary>
+      <div class="faq-body">
+        <p>Το Judo εμπνεύστηκε από παλιά σχολεία Jiu-Jitsu (Koryu) μέσω του Jigoro Kano το 1882. Το σημερινό Brazilian Jiu-Jitsu εξελίχθηκε ξεχωριστά στη Βραζιλία τον 20ό αιώνα. Μοιράζονται κοινές ρίζες (kuzushi, μη-αντίσταση), αλλά το Judo εστιάζει στην πάλη από όρθια θέση και στις ρίψεις, ενώ το BJJ στην πάλη εδάφους.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Ποιος «εφηύρε» το Brazilian Jiu-Jitsu;</summary>
+      <div class="faq-body">
+        <p>Δεν υπάρχει ένας αδιαμφισβήτητος εφευρέτης. Διάφορες οικογένειες έπαιξαν ρόλο, όπως η Gracie και ο Luiz França. Η γνωστή αφήγηση «ο Maeda δίδαξε τους Gracie» είναι μέρος της ιστορίας, όχι όλη η ιστορία.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Γιατί ο Kano άλλαξε το όνομα από «Jujitsu» σε «Judo»;</summary>
+      <div class="faq-body">
+        <p>Η αλλαγή από «jutsu» (τεχνική) σε «do» (δρόμος) αντικατόπτριζε τη φιλοσοφική του πρόθεση: το Judo δεν ήταν απλώς τεχνικές αυτοάμυνας, αλλά ένα εκπαιδευτικό σύστημα βασισμένο στις αρχές Seiryoku Zen'yo και Jita Kyoei.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Θεωρούσε ο ίδιος ο Kano το Judo «επιστήμη»;</summary>
+      <div class="faq-body">
+        <p>Ναι! Σε διάλεξη του 1889 αναφέρθηκε στο judo ως «αυτή η επιστήμη». Η ίδια η δημιουργία του βασίστηκε σε συστηματική έρευνα: συλλογή κειμένων, σύγκριση στυλ, συζήτηση με δασκάλους, εφαρμογή και αναδιαμόρφωση.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Πότε ξεκίνησε η επίσημη επιστημονική έρευνα γύρω από το Judo;</summary>
+      <div class="faq-body">
+        <p>Από το 1932, με την ίδρυση της Ιατρικής Ερευνητικής Ομάδας Judo του Kōdōkan. Σημαντικοί σταθμοί ήταν επίσης η European Society for the Scientific Study of Judo (1989) και η International Association of Judo Researchers (2007).</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Γιατί ξεκινάμε ένα πρακτικό πρόγραμμα προπονητικής με ιστορία και φιλοσοφία;</summary>
+      <div class="faq-body">
+        <p>Γιατί οι δύο αρχές του Kano δεν είναι διακοσμητικά συνθήματα, είναι εργαλεία σχεδιασμού προπόνησης: καθορίζουν πώς διδάσκεις τεχνική και πώς διαχειρίζεσαι την τάξη. Ένας προπονητής που κατανοεί το «γιατί» πίσω από τους κανόνες τούς εφαρμόζει πιο συνειδητά.</p>
+      </div>
+    </details>
+
+  </div>
+</section>
+
+<section>
+  <h2>Πηγές</h2>
+  <div class="sources">
+
+    <div class="source-item">
+      <span class="snum2">01</span>
+      <div class="sbody">
+        <a href="https://kdkjd.org/%E8%AC%9B%E9%81%93%E9%A4%A8%E6%9F%94%E9%81%93%E3%81%AE%E6%AD%B4%E5%8F%B2/" target="_blank" rel="noopener">History of Kodokan Judo</a>
+        <span class="spublisher">Kodokan Judo Institute (επίσημος φορέας)</span>
+        <span class="snote">Ιδρυτική ιστορία, ρίζες σε Tenjin Shin'yo-ryu &amp; Kito-ryu.</span>
+      </div>
+    </div>
+
+    <div class="source-item">
+      <span class="snum2">02</span>
+      <div class="sbody">
+        <a href="https://www.ijf.org/history/history/127" target="_blank" rel="noopener">History and Culture</a>
+        <span class="spublisher">International Judo Federation</span>
+        <span class="snote">Τεχνικές κατηγορίες, mondo, γυναικείο judo, εξέλιξη ζωνών, ίδρυση IJF.</span>
+      </div>
+    </div>
+
+    <div class="source-item">
+      <span class="snum2">03</span>
+      <div class="sbody">
+        <a href="https://www.ijf.org/history/jigoro-kano-who-was-he-really" target="_blank" rel="noopener">Jigoro Kano, Who Was He Really? (σειρά 10 άρθρων)</a>
+        <span class="spublisher">International Judo Federation</span>
+        <span class="snote">Βιογραφικά στοιχεία Kano: παιδική ηλικία, οικογένεια, εκπαίδευση, ταξίδια, όραμα.</span>
+      </div>
+    </div>
+
+    <div class="source-item">
+      <span class="snum2">04</span>
+      <div class="sbody">
+        <a href="#" target="_blank" rel="noopener">Callan, M. (2018). Scientific research in judo: a potted history.</a>
+        <span class="spublisher">i-dojo International Judo Research Unit, University of Hertfordshire - παρουσιάστηκε στο Porec, Κροατία</span>
+        <span class="snote">Βιογραφικά στοιχεία Kano, ιστορία επιστημονικής έρευνας στο judo, GHQ ban 1945-1950, ίδρυση IAJR.</span>
+      </div>
+    </div>
+
+    <div class="source-item">
+      <span class="snum2">05</span>
+      <div class="sbody">
+        <a href="#" target="_blank" rel="noopener">Bennett, A. (2009). Jigoro Kano and the Kodokan: An Innovative Response to Modernisation.</a>
+        <span class="spublisher">Kōdōkan Judo Institute, Τόκυο</span>
+        <span class="snote">Πρωτογενής πηγή για τη ζωή και σκέψη του Kano.</span>
+      </div>
+    </div>
+
+    <div class="source-item">
+      <span class="snum2">06</span>
+      <div class="sbody">
+        <a href="#" target="_blank" rel="noopener">Hoare, S. (2009). A History of Judo.</a>
+        <span class="spublisher">Yamagi, Λονδίνο</span>
+        <span class="snote">Βιογραφικό και ιστορικό υπόβαθρο Kano.</span>
+      </div>
+    </div>
+
+    <div class="source-item">
+      <span class="snum2">07</span>
+      <div class="sbody">
+        <a href="https://doi.org/10.1016/j.rbce.2018.03.003" target="_blank" rel="noopener">Primórdios do jiu-jitsu e dos confrontos intermodalidades no Brasil</a>
+        <span class="spublisher">Revista Brasileira de Ciências do Esporte · Lise &amp; Capraro (2018)</span>
+        <span class="snote">Τεκμηριώνει δραστηριότητα jiu-jitsu στο Ρίο πριν τον Maeda.</span>
+      </div>
+    </div>
+
+    <div class="source-item">
+      <span class="snum2">08</span>
+      <div class="sbody">
+        <a href="https://doi.org/10.18573/mas.105" target="_blank" rel="noopener">Nationalism, Immigration and Identity: The Gracies and the Making of Brazilian Jiu-Jitsu, 1934–1943</a>
+        <span class="spublisher">Martial Arts Studies, Cardiff University Press</span>
+        <span class="snote">Πώς η οικογένεια Gracie διαμόρφωσε το BJJ ως ξεχωριστό άθλημα.</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="ask">
+  <h2>Έχεις απορία για αυτή την ενότητα;</h2>
+  <p class="sub2">Άφησέ την εδώ ανώνυμα. Θα τις διαβάσω όλες πριν το επόμενο μάθημα και θα ξεκινήσουμε με τις απαντήσεις.</p>
+  <div class="form-frame-holder">
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdvrMXgqSWPx89b0vqXCfCyniSNB5FCv4_z3V0q9hJXc1Pf7A/viewform?usp=dialog">Loading…</iframe>
+  </div>
+</section>
+
+<div class="closing">
+  <p class="next-label">Επόμενη ενότητα</p>
+  <p class="next-title">Αρχές Ασφάλειας στο Παιδικό Τζούντο – Ζίου Ζίτσου</p>
+</div>
+</div>
+
+<footer class="pagefoot">ΕΝΟΤΗΤΑ 1 · ΙΣΤΟΡΙΑ &amp; ΦΙΛΟΣΟΦΙΑ</footer>
+
+<script>
+  document.querySelectorAll('.quiz').forEach(function(quiz){
+    var opts = quiz.querySelectorAll('.opt');
+    var feedback = quiz.querySelector('.feedback');
+    var answered = false;
+    opts.forEach(function(opt){
+      opt.addEventListener('click', function(){
+        if(answered) return;
+        answered = true;
+        var isCorrect = opt.getAttribute('data-correct') === 'true';
+        opts.forEach(function(o){
+          o.disabled = true;
+          if(o.getAttribute('data-correct') === 'true'){
+            o.classList.add('correct');
+          } else if(o === opt && !isCorrect){
+            o.classList.add('incorrect');
+          }
+        });
+        feedback.textContent = isCorrect
+          ? "Σωστά! Ακριβώς αυτό."
+          : "Όχι ακριβώς. Η σωστή επιλογή είναι τονισμένη παραπάνω.";
+        feedback.className = 'feedback show ' + (isCorrect ? 'ok' : 'no');
+      });
+    });
+  });
+</script>
