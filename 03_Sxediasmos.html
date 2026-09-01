@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ενότητα 3: Σχεδιασμός Ασφαλούς Προπονητικής Μονάδας</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap');
+
+
+  :root{
+    --ink:#262320;
+    --cream:#F6F1E8;
+    --cream-panel:#FFFFFF;
+    --burgundy:#6E1F2B;
+    --burgundy-deep:#4E1620;
+    --gold:#B98A3D;
+    --sage:#4C6B5A;
+    --sage-panel:#EEF3F0;
+    --line: rgba(38,35,32,0.12);
+    --radius: 14px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+
+  header.mod{
+    background:var(--burgundy);
+    background-image: radial-gradient(circle at 85% 20%, rgba(255,255,255,0.06), transparent 55%);
+    color:#fff;
+    padding:44px 24px 32px;
+  }
+  header.mod .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:#E8C98F;
+    margin:0 0 10px;
+  }
+  header.mod h1{
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    font-size:clamp(28px,5vw,40px);
+    margin:0 0 8px;
+    letter-spacing:-0.01em;
+  }
+  header.mod .sub{
+    color:#E9D9CE; font-size:15.5px; margin:0 0 22px; max-width:560px;
+  }
+  header.mod .meta{
+    display:flex; gap:18px; font-family:'JetBrains Mono', monospace;
+    font-size:12px; color:rgba(255,255,255,0.75); margin-bottom:20px;
+    letter-spacing:0.04em;
+  }
+  .belt-track{
+    max-width:760px;margin:0 auto;
+    display:flex; gap:5px; align-items:center;
+  }
+  .belt-stripe{
+    height:7px; flex:1; border-radius:4px;
+    background: rgba(255,255,255,0.18);
+  }
+  .belt-stripe.current{background:var(--gold);}
+  .belt-track .lbl{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px; color:rgba(255,255,255,0.75);
+    margin-top:8px; letter-spacing:0.04em;
+  }
+
+  section{padding:44px 0 0;}
+  section h2{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:25px;
+    margin:0 0 6px;
+    color:var(--burgundy-deep);
+  }
+  section .kicker{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--gold); margin:0 0 8px; font-weight:600;
+  }
+  p{margin:0 0 16px; font-size:16px;}
+  ul.points{margin:12px 0 16px; padding-left:0; list-style:none;}
+  ul.points li{
+    position:relative; padding-left:28px; margin-bottom:12px; font-size:16px;
+  }
+  ul.points li::before{
+    content:"";
+    position:absolute; left:0; top:9px;
+    width:9px; height:9px; border-radius:2px;
+    background:var(--gold);
+    transform:rotate(45deg);
+  }
+
+  .objectives{
+    background:var(--cream-panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:26px 28px;
+    margin-bottom:8px;
+  }
+  .objectives .obj-item{
+    display:flex; gap:14px; align-items:flex-start;
+    padding:12px 0; border-bottom:1px solid var(--line);
+  }
+  .objectives .obj-item:last-child{border-bottom:none; padding-bottom:0;}
+  .objectives .obj-item:first-child{padding-top:0;}
+  .objectives .check{
+    flex:0 0 22px; height:22px; border-radius:50%;
+    background:var(--sage-panel); color:var(--sage);
+    display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:700; margin-top:1px;
+  }
+  .objectives .obj-item p{margin:0; font-size:15.5px;}
+
+  .agenda{margin:6px 0 8px;}
+  .agenda-item{
+    display:flex; align-items:center; gap:16px;
+    background:var(--cream-panel);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:14px 18px; margin-bottom:8px;
+  }
+  .agenda-item .num{
+    font-family:'Fraunces', serif; font-weight:700; font-size:20px;
+    color:var(--gold); flex:0 0 30px;
+  }
+  .agenda-item .txt{flex:1; font-size:15px;}
+  .agenda-item .time{
+    font-family:'JetBrains Mono', monospace; font-size:13px;
+    color:var(--sage); background:var(--sage-panel);
+    padding:4px 10px; border-radius:100px; flex:0 0 auto;
+  }
+
+  .content-block{margin-bottom:36px;}
+  .visual-note{
+    display:flex; align-items:center; gap:10px;
+    background:var(--sage-panel); color:var(--sage);
+    border:1px dashed var(--sage);
+    border-radius:10px; padding:14px 16px; font-size:14px;
+    margin-top:6px;
+  }
+
+  .nuance{
+    display:flex; gap:12px; align-items:flex-start;
+    background:#FBF3E3; border:1px solid var(--gold);
+    border-radius:10px; padding:16px 18px; margin-top:14px;
+  }
+  .nuance .mark{
+    flex:0 0 22px; font-size:17px; line-height:1.3; color:var(--gold);
+  }
+  .nuance p{margin:0; font-size:14.5px; color:#5B4A2A; line-height:1.55;}
+  .nuance p strong{color:#4A3A1E;}
+  .nuance .src{
+    display:block; margin-top:6px; font-family:'JetBrains Mono', monospace;
+    font-size:12px; color:#8A7040;
+  }
+
+  .discussion{
+    background:var(--burgundy-deep);
+    color:#fff;
+    border-radius:var(--radius);
+    padding:30px 30px 26px;
+    margin:16px 0 8px;
+  }
+  .discussion h2{color:#fff;}
+  .discussion .kicker{color:#E8C98F;}
+  .discussion .prompt{
+    font-family:'Fraunces', serif; font-size:19px; font-style:italic;
+    color:#F3E7D9; margin:14px 0 22px; line-height:1.5;
+  }
+  .discussion .step{
+    display:flex; gap:14px; align-items:flex-start; margin-bottom:14px;
+  }
+  .discussion .step .snum{
+    flex:0 0 26px; height:26px; border-radius:50%;
+    background:var(--gold); color:var(--burgundy-deep);
+    display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:700;
+  }
+  .discussion .step p{margin:0; color:#E9D9CE; font-size:15px;}
+
+  .key-concept{
+    background:var(--cream-panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:28px 28px 24px;
+    box-shadow:0 1px 2px rgba(0,0,0,0.03);
+    margin:8px 0 8px;
+  }
+  .key-concept .tag{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--burgundy-deep); color:#fff;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px; font-weight:500; letter-spacing:0.06em;
+    text-transform:uppercase;
+    padding:7px 14px; border-radius:100px;
+    margin-bottom:16px;
+  }
+  .key-concept ul.points{margin:0;}
+  .key-concept ul.points li:last-child{margin-bottom:0;}
+
+  .quiz{
+    background:var(--cream-panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:26px 28px 24px;
+    margin:16px 0 28px;
+  }
+  .quiz .q-num{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px; color:var(--sage); letter-spacing:0.08em;
+    text-transform:uppercase; margin-bottom:6px;
+  }
+  .quiz .q-text{font-weight:600; font-size:16.5px; margin-bottom:16px;}
+  .opt{
+    display:block; width:100%; text-align:left;
+    background:var(--cream); border:1px solid var(--line);
+    border-radius:10px; padding:13px 16px; margin-bottom:10px;
+    font-family:'Inter',sans-serif; font-size:15px; color:var(--ink);
+    cursor:pointer; transition:border-color .15s, background .15s;
+  }
+  .opt:hover{border-color:var(--gold);}
+  .opt.correct{background:#EBF2ED; border-color:var(--sage); color:var(--sage); font-weight:600;}
+  .opt.incorrect{background:#F7E9E7; border-color:#B34A3B; color:#8C382C; font-weight:600;}
+  .opt[disabled]{cursor:default;}
+  .feedback{
+    margin-top:10px; font-size:14.5px; padding:12px 14px;
+    border-radius:8px; display:none;
+  }
+  .feedback.show{display:block;}
+  .feedback.ok{background:#EBF2ED; color:var(--sage);}
+  .feedback.no{background:#F7E9E7; color:#8C382C;}
+
+  .faq{margin:6px 0 8px;}
+  .faq-item{
+    background:var(--cream-panel);
+    border:1px solid var(--line);
+    border-radius:10px;
+    margin-bottom:10px;
+    overflow:hidden;
+  }
+  .faq-item summary{
+    list-style:none;
+    cursor:pointer;
+    padding:16px 20px;
+    font-weight:600;
+    font-size:15.5px;
+    color:var(--burgundy-deep);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+  }
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary::after{
+    content:"+";
+    font-family:'JetBrains Mono', monospace;
+    font-size:20px;
+    color:var(--gold);
+    flex:0 0 auto;
+    transition:transform .15s;
+  }
+  .faq-item[open] summary::after{ transform:rotate(45deg); }
+  .faq-item .faq-body{
+    padding:0 20px 18px;
+    font-size:15px;
+    color:var(--ink);
+  }
+  .faq-item .faq-body p{margin:0 0 10px;}
+  .faq-item .faq-body p:last-child{margin-bottom:0;}
+
+  .sources{margin:6px 0 8px;}
+  .source-item{
+    display:flex; gap:14px;
+    background:var(--cream-panel);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:16px 18px;
+    margin-bottom:10px;
+  }
+  .source-item .snum2{
+    flex:0 0 24px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px; font-weight:700; color:var(--gold);
+  }
+  .source-item .sbody a{
+    color:var(--burgundy-deep);
+    font-weight:600;
+    font-size:15px;
+    text-decoration:none;
+    border-bottom:1px solid var(--gold);
+  }
+  .source-item .sbody a:hover{ color:var(--burgundy); }
+  .source-item .sbody .spublisher{
+    display:block; font-size:13px; color:var(--sage);
+    margin-top:2px; font-family:'JetBrains Mono', monospace;
+  }
+  .source-item .sbody .snote{
+    display:block; font-size:13.5px; color:var(--ink);
+    margin-top:6px; opacity:0.85;
+  }
+  .sources-addnote{
+    font-family:'JetBrains Mono', monospace; font-size:12px;
+    color:var(--sage); background:var(--sage-panel);
+    border:1px dashed var(--sage); border-radius:10px;
+    padding:12px 16px; margin-top:6px;
+  }
+
+  .ask{
+    background:var(--burgundy-deep);
+    color:#fff;
+    border-radius:var(--radius);
+    padding:32px 30px;
+    margin-top:36px;
+  }
+  .ask h2{color:#fff; margin-bottom:8px;}
+  .ask p.sub2{color:#E9D9CE; font-size:15px; margin-bottom:20px;}
+  .ask .form-frame-holder{
+    background:#fff; border-radius:10px; overflow:hidden;
+    min-height:420px;
+  }
+  .ask .form-frame-holder iframe{
+    display:block; width:100%; height:420px; border:0;
+  }
+
+  .closing{
+    text-align:center; padding:40px 20px; margin-top:8px;
+    border-top:1px solid var(--line);
+  }
+  .closing p.next-label{
+    font-family:'JetBrains Mono', monospace; font-size:12px;
+    letter-spacing:0.1em; text-transform:uppercase; color:var(--gold);
+    margin-bottom:8px;
+  }
+  .closing p.next-title{
+    font-family:'Fraunces', serif; font-size:20px; font-weight:600;
+    color:var(--burgundy-deep); margin:0;
+  }
+
+  footer.pagefoot{
+    text-align:center; padding:24px 0 0; color:rgba(38,35,32,0.5);
+    font-size:13px; font-family:'JetBrains Mono', monospace;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+  }
+
+  /* ---- Sticky mini-nav ---- */
+  .mininav{
+    position:sticky; top:0; z-index:20;
+    background:rgba(246,241,232,0.94);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .mininav-inner{
+    max-width:760px; margin:0 auto; padding:0 24px;
+    display:flex; gap:4px; overflow-x:auto;
+    -ms-overflow-style:none; scrollbar-width:none;
+  }
+  .mininav-inner::-webkit-scrollbar{display:none;}
+  .mininav a{
+    flex:0 0 auto;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px; letter-spacing:0.03em;
+    color:var(--ink); opacity:0.65;
+    text-decoration:none;
+    padding:12px 10px;
+    border-bottom:2px solid transparent;
+    white-space:nowrap;
+  }
+  .mininav a:hover{ opacity:1; border-bottom-color:var(--gold); }
+
+  /* ---- Timeline ---- */
+  .timeline{ position:relative; margin:20px 0 8px; padding-left:26px; }
+  .timeline::before{
+    content:""; position:absolute; left:6px; top:6px; bottom:6px;
+    width:2px; background:var(--line);
+  }
+  .tl-item{ position:relative; padding-bottom:26px; }
+  .tl-item:last-child{ padding-bottom:0; }
+  .tl-item::before{
+    content:""; position:absolute; left:-26px; top:3px;
+    width:13px; height:13px; border-radius:50%;
+    background:var(--gold); border:3px solid var(--cream);
+    box-shadow:0 0 0 1px var(--gold);
+  }
+  .tl-year{
+    font-family:'JetBrains Mono', monospace; font-size:12.5px;
+    font-weight:700; color:var(--gold); letter-spacing:0.04em;
+    margin-bottom:3px;
+  }
+  .tl-title{
+    font-family:'Fraunces', serif; font-weight:600; font-size:17px;
+    color:var(--burgundy-deep); margin:0 0 4px;
+  }
+  .tl-body{ font-size:15px; margin:0; color:var(--ink); }
+  .tl-body p{ margin:0 0 4px; font-size:15px; }
+
+  /* ---- Nuance as collapsible <details> ---- */
+  details.nuance{ padding:0; overflow:hidden; }
+  details.nuance summary{
+    list-style:none; cursor:pointer;
+    display:flex; gap:10px; align-items:center;
+    padding:14px 18px; font-weight:600; font-size:14.5px; color:#4A3A1E;
+  }
+  details.nuance summary::-webkit-details-marker{ display:none; }
+  details.nuance summary::after{
+    content:"+"; margin-left:auto; font-family:'JetBrains Mono', monospace;
+    font-size:18px; color:var(--gold); transition:transform .15s;
+  }
+  details.nuance[open] summary::after{ transform:rotate(45deg); }
+  details.nuance .nuance-body{ padding:0 18px 16px 46px; }
+  details.nuance .nuance-body p{ margin:0; font-size:14.5px; color:#5B4A2A; line-height:1.55; }
+  details.nuance .nuance-body .src{
+    display:block; margin-top:8px; font-family:'JetBrains Mono', monospace;
+    font-size:12px; color:#8A7040;
+  }
+
+  /* ---- Scenario check (philosophy sections) ---- */
+  .scenario{
+    background:var(--sage-panel); border:1px solid var(--sage);
+    border-radius:10px; padding:18px 20px; margin-top:16px;
+  }
+  .scenario .stitle{
+    font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:0.08em;
+    text-transform:uppercase; color:var(--sage); font-weight:700; margin-bottom:8px;
+  }
+  .scenario p.scase{ font-size:15px; margin:0 0 10px; }
+  .scenario details{ margin-top:6px; }
+  .scenario summary{
+    cursor:pointer; font-weight:600; font-size:14px; color:var(--sage);
+    list-style:none;
+  }
+  .scenario summary::-webkit-details-marker{ display:none; }
+  .scenario summary::before{ content:"▸ "; }
+  .scenario details[open] summary::before{ content:"▾ "; }
+  .scenario .sanswer{ font-size:14.5px; margin-top:8px; color:#33473C; }
+
+  /* ---- Compare table ---- */
+  .compare{
+    width:100%; border-collapse:collapse; margin:14px 0 8px;
+    font-size:14.5px; background:var(--cream-panel);
+    border:1px solid var(--line); border-radius:var(--radius); overflow:hidden;
+  }
+  .compare th, .compare td{ padding:12px 14px; text-align:left; border-bottom:1px solid var(--line); }
+  .compare th{
+    font-family:'JetBrains Mono', monospace; font-size:11.5px; letter-spacing:0.05em;
+    text-transform:uppercase; color:#fff; background:var(--burgundy-deep);
+  }
+  .compare td:first-child, .compare th:first-child{ font-weight:600; color:var(--burgundy-deep); width:34%; }
+  .compare tr:last-child td{ border-bottom:none; }
+
+  /* ---- Inline checkpoint label ---- */
+  .checkpoint-kicker{
+    font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--sage); margin:0 0 8px; font-weight:700;
+  }
+
+  /* ---- Discussion: alt prompts & keyword chips ---- */
+  .discussion .prompt-label{
+    font-family:'JetBrains Mono', monospace; font-size:11.5px; letter-spacing:0.06em;
+    text-transform:uppercase; color:var(--gold); margin:18px 0 4px; font-weight:700;
+  }
+  .discussion .prompt-label:first-of-type{ margin-top:6px; }
+  .discussion .keywords{
+    margin-top:20px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.15);
+  }
+  .discussion .kw-title{
+    font-family:'JetBrains Mono', monospace; font-size:11.5px; letter-spacing:0.06em;
+    text-transform:uppercase; color:#E8C98F; margin:0 0 10px; font-weight:700;
+  }
+  .discussion .kw-list{ display:flex; flex-wrap:wrap; gap:8px; }
+  /* ---- Video suggestion card ---- */
+  .video-card{
+    background:var(--cream-panel); border:1px solid var(--line); border-radius:var(--radius);
+    padding:18px; margin:18px 0;
+  }
+  .video-card .vc-label{
+    font-family:'JetBrains Mono', monospace; font-size:11.5px; letter-spacing:0.06em;
+    text-transform:uppercase; color:var(--burgundy); font-weight:700; margin:0 0 10px;
+    display:flex; align-items:center; gap:6px;
+  }
+  .video-card .vc-frame{
+    position:relative; width:100%; padding-top:56.25%; border-radius:10px; overflow:hidden;
+    background:#000;
+  }
+  .video-card .vc-frame iframe{
+    position:absolute; top:0; left:0; width:100%; height:100%; border:0;
+  }
+  .video-card .vc-note{ font-size:14.5px; margin:12px 0 0; color:var(--ink); }
+  .video-card .vc-note strong{ color:var(--burgundy-deep); }
+
+  /* ---- Audio recording card ---- */
+  .audio-card{
+    background:var(--cream-panel); border:1px solid var(--line); border-radius:var(--radius);
+    padding:18px; margin:18px 0; display:flex; align-items:center; gap:16px;
+  }
+  .audio-card .ac-avatar{
+    width:56px; height:56px; border-radius:50%; object-fit:cover; flex:0 0 auto;
+    background:var(--sage-panel);
+  }
+  .audio-card .ac-body{ flex:1; min-width:0; }
+  .audio-card .ac-title{ font-family:'Fraunces', serif; font-weight:600; font-size:16px; margin:0 0 10px; }
+  .audio-card .ac-row{ display:flex; align-items:center; gap:12px; }
+  .audio-card .ac-play{
+    width:34px; height:34px; border-radius:50%; border:none; flex:0 0 auto;
+    background:var(--burgundy); color:#fff; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; font-size:14px;
+  }
+  .audio-card .ac-play:hover{ background:var(--burgundy-deep); }
+  .audio-card .ac-seek{
+    flex:1; -webkit-appearance:none; appearance:none; height:4px; border-radius:2px;
+    background:var(--line); outline:none; cursor:pointer;
+  }
+  .audio-card .ac-seek::-webkit-slider-thumb{
+    -webkit-appearance:none; width:13px; height:13px; border-radius:50%;
+    background:var(--gold); cursor:pointer;
+  }
+  .audio-card .ac-seek::-moz-range-thumb{
+    width:13px; height:13px; border-radius:50%; background:var(--gold); border:none; cursor:pointer;
+  }
+  .audio-card .ac-time{
+    font-family:'JetBrains Mono', monospace; font-size:12.5px; color:var(--ink); opacity:0.7;
+    flex:0 0 auto; min-width:38px; text-align:right;
+  }
+
+  /* ---- Pre-class checklist ---- */
+  .checklist{
+    background:var(--cream-panel); border:1px solid var(--line); border-radius:var(--radius);
+    padding:8px 20px; margin:16px 0;
+  }
+  .checklist .cl-item{
+    display:flex; align-items:flex-start; gap:12px;
+    padding:12px 0; border-bottom:1px solid var(--line);
+  }
+  .checklist .cl-item:last-child{ border-bottom:none; }
+  .checklist input[type="checkbox"]{
+    width:19px; height:19px; margin-top:2px; accent-color:var(--sage); flex:0 0 auto; cursor:pointer;
+  }
+  .checklist label{ font-size:15px; cursor:pointer; }
+  .checklist label strong{ color:var(--burgundy-deep); }
+
+  /* ---- Alert box (emergency protocol) ---- */
+  .alert-box{
+    background:#FBF0EC; border:1px solid #DEB6A6; border-left:4px solid var(--burgundy);
+    border-radius:var(--radius); padding:18px 20px; margin:16px 0;
+  }
+  .alert-box .ab-title{
+    font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:0.06em;
+    text-transform:uppercase; color:var(--burgundy); font-weight:700; margin:0 0 10px;
+    display:flex; align-items:center; gap:6px;
+  }
+
+  /* ---- Progression steps (introducing a new technique) ---- */
+  .progression{ display:flex; flex-direction:column; gap:0; margin:16px 0; }
+  .prog-step{
+    display:flex; gap:14px; padding:14px 0; border-bottom:1px solid var(--line);
+  }
+  .prog-step:last-child{ border-bottom:none; }
+  .prog-num{
+    font-family:'JetBrains Mono', monospace; font-weight:700; font-size:14px;
+    color:#fff; background:var(--sage); border-radius:50%;
+    width:28px; height:28px; flex:0 0 auto; display:flex; align-items:center; justify-content:center;
+  }
+  .prog-body p{ margin:0; font-size:15px; }
+  .prog-body strong{ color:var(--burgundy-deep); }
+</style>
+</head>
+<body>
+<header class="mod">
+  <div class="wrap" style="padding:0;">
+    <p class="eyebrow">Ενότητα 3 / 8</p>
+    <h1>Σχεδιασμός Ασφαλούς Προπονητικής Μονάδας</h1>
+    <p class="sub">Από τη θεωρία στην πράξη: πώς στήνεται ένα ασφαλές μάθημα, βήμα προς βήμα.</p>
+    <div class="meta">
+      <span>⏱ 2 ώρες</span>
+      <span>📖 Πρακτική διάλεξη</span>
+    </div>
+    <div class="belt-track">
+      <div class="belt-stripe"></div>
+      <div class="belt-stripe"></div>
+      <div class="belt-stripe current"></div>
+      <div class="belt-stripe"></div>
+      <div class="belt-stripe"></div>
+      <div class="belt-stripe"></div>
+      <div class="belt-stripe"></div>
+      <div class="belt-stripe"></div>
+    </div>
+    <p class="lbl">ΕΝΟΤΗΤΑ 3 ΑΠΟ 8</p>
+  </div>
+</header>
+
+<nav class="mininav">
+  <div class="mininav-inner">
+    <a href="#stoxoi">Στόχοι</a>
+    <a href="#roi">Δομή Μαθήματος</a>
+    <a href="#xoros">Χώρος &amp; Υλικά</a>
+    <a href="#omades">Ομαδοποίηση</a>
+    <a href="#texnikes">Τεχνικές</a>
+    <a href="#ektakti">Έκτακτη Ανάγκη</a>
+    <a href="#goneis">Γονείς</a>
+    <a href="#faq">FAQ</a>
+  </div>
+</nav>
+
+<div class="wrap">
+<section id="stoxoi">
+  <h2>Μαθησιακοί Στόχοι</h2>
+  <p>Με την ολοκλήρωση του μαθήματος, οι προπονητές/τριες θα μπορούν να:</p>
+  <div class="objectives">
+    <div class="obj-item">
+      <div class="check">✓</div>
+      <p>Σχεδιάζουν τη ροή ενός μαθήματος με σωστή σειρά φάσεων και κατάλληλη αναλογία προπονητή/παιδιών.</p>
+    </div>
+    <div class="obj-item">
+      <div class="check">✓</div>
+      <p>Οργανώνουν χώρο, τατάμι και εξοπλισμό σύμφωνα με βασικές προδιαγραφές ασφάλειας.</p>
+    </div>
+    <div class="obj-item">
+      <div class="check">✓</div>
+      <p>Επιλέγουν και ιεραρχούν τεχνικές με σαφή κριτήρια προτεραιότητας, και εισάγουν νέες τεχνικές σταδιακά.</p>
+    </div>
+    <div class="obj-item">
+      <div class="check">✓</div>
+      <p>Εφαρμόζουν ένα βασικό πρωτόκολλο έκτακτης ανάγκης και επικοινωνούν σαφώς με τους γονείς.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Δομή Ενότητας</h2>
+  <div class="agenda">
+    <div class="agenda-item"><span class="num">01</span><span class="txt">Δομή και ρυθμός μαθήματος</span><span class="time">20'</span></div>
+    <div class="agenda-item"><span class="num">02</span><span class="txt">Χώρος, Τατάμι &amp; Εξοπλισμός</span><span class="time">20'</span></div>
+    <div class="agenda-item"><span class="num">03</span><span class="txt">Ομαδοποίηση Αθλητών</span><span class="time">15'</span></div>
+    <div class="agenda-item"><span class="num">04</span><span class="txt">Επιλογή &amp; Προτεραιότητα Τεχνικών</span><span class="time">30'</span></div>
+    <div class="agenda-item"><span class="num">05</span><span class="txt">Πρωτόκολλο Έκτακτης Ανάγκης</span><span class="time">15'</span></div>
+    <div class="agenda-item"><span class="num">06</span><span class="txt">Επικοινωνία με Γονείς</span><span class="time">10'</span></div>
+    <div class="agenda-item"><span class="num">07</span><span class="txt">Συζήτηση ομάδας &amp; ερωτήσεις</span><span class="time">10'</span></div>
+  </div>
+</section>
+
+<section class="content-block" id="roi">
+  <p class="kicker">Πρακτική</p>
+  <h2>Δομή και ρυθμός μαθήματος</h2>
+
+  <p>Η επιλογή της δομής και του ρυθμού ενός μαθήματος είναι η αρχή για τη διασφάλιση της ασφάλειας στην τάξη. Καμία τεχνική δεν εφαρμόζεται κατευθείαν σε randori χωρίς να έχει προηγηθεί προοδευτική προετοιμασία.</p>
+
+  <div class="progression">
+    <div class="prog-step">
+      <div class="prog-num">1</div>
+      <div class="prog-body"><p><strong>Προθέρμανση</strong> : κινητικότητα, ελαφρύ καρδιαγγειακό, παιχνίδια επαφής χαμηλής έντασης.</p></div>
+    </div>
+    <div class="prog-step">
+      <div class="prog-num">2</div>
+      <div class="prog-body"><p><strong>Ukemi</strong> : επανάληψη πτώσεων, ακόμα και σε προχωρημένες ομάδες. Στατικά στην αρχή, σε κίνηση αργότερα.</p></div>
+    </div>
+    <div class="prog-step">
+      <div class="prog-num">3</div>
+      <div class="prog-body"><p><strong>Uchi-komi</strong> : στατική ή σε κίνηση εξάσκηση τεχνικής χωρίς ολοκλήρωση ρίψης, χωρίς αντίσταση.</p></div>
+    </div>
+    <div class="prog-step">
+      <div class="prog-num">4</div>
+      <div class="prog-body"><p><strong>Nage-komi</strong> : ολοκληρωμένη ρίψη με συνεργαζόμενο συναθλητή, ελεγχόμενη αντίσταση.</p></div>
+    </div>
+    <div class="prog-step">
+      <div class="prog-num">5</div>
+      <div class="prog-body"><p><strong>Randori</strong> : ελεύθερη εφαρμογή, μόνο αφού έχουν προηγηθεί τα παραπάνω βήματα.</p></div>
+    </div>
+    <div class="prog-step">
+      <div class="prog-num">6</div>
+      <div class="prog-body"><p><strong>Αποθεραπεία</strong> : χαλάρωση.</p></div>
+    </div>
+  </div>
+
+  <details class="nuance">
+    <summary><span class="mark">👥</span> Αναλογία προπονητή/παιδιών</summary>
+    <div class="nuance-body">
+      <p>Δεν υπάρχει ένας «σωστός» αριθμός για όλες τις περιπτώσεις. Εξαρτάται από την ηλικία, το επίπεδο εμπειρίας και τον χώρο. Ο γενικός κανόνας: όσο μικρότερη η ηλικία και όσο νεότερη η ομάδα στο άθλημα, τόσο μικρότερος ο αριθμός παιδιών ανά ενήλικα επόπτη. Σε μεγαλύτερες ομάδες, ένας δεύτερος βοηθός (ακόμα και προχωρημένος έφηβος αθλητής) κάνει ουσιαστική διαφορά στην ασφάλεια.</p>
+    </div>
+  </details>
+</section>
+
+<section>
+  <p class="checkpoint-kicker">⏸ Στάσου και σκέψου</p>
+  <div class="quiz" id="q1">
+    <p class="q-num">Έλεγχος κατανόησης</p>
+    <p class="q-text">Ποια φάση προηγείται πάντα του randori;</p>
+    <button class="opt" data-correct="false">Απευθείας το ζέσταμα</button>
+    <button class="opt" data-correct="true">Uchi-komi και nage-komi με ελεγχόμενη αντίσταση</button>
+    <button class="opt" data-correct="false">Καμία. Το randori μπορεί να ξεκινήσει οποιαδήποτε στιγμή</button>
+    <div class="feedback"></div>
+  </div>
+</section>
+
+<section class="content-block" id="xoros">
+  <p class="kicker">Πρακτική</p>
+  <h2>Χώρος, τατάμι και εξοπλισμός</h2>
+
+  <ul class="points">
+    <li><strong>Τατάμι:</strong> καθαρό, χωρίς κενά ανάμεσα σε στρώματα, επαρκής επιφάνεια για τον αριθμό παιδιών. Ενδεικτικά, περίπου 60 τ.μ. τατάμι για ομάδα 25 παιδιών.</li>
+    <li><strong>Τζουντόγκι:</strong> καθαρό και πλυμένο πριν από κάθε μάθημα, σωστό μέγεθος.</li>
+    <li><strong>Υγιεινή:</strong> κομμένα νύχια, χωρίς κοσμήματα, καθαρά χέρια/πόδια πριν το μάθημα, υποδήματα όταν κινούνται εκτός τατάμι.</li>
+    <li><strong>Χώρος γύρω από το τατάμι:</strong> ελεύθερος από αιχμηρές γωνίες, τοίχους πολύ κοντά, ή εμπόδια. Τα παιδιά πέφτουν προς όλες τις κατευθύνσεις.</li>
+  </ul>
+
+  <div class="checklist">
+    <div class="cl-item">
+      <input type="checkbox" id="cl1"><label for="cl1">Τατάμι καθαρό, χωρίς κενά ή φθορές</label>
+    </div>
+    <div class="cl-item">
+      <input type="checkbox" id="cl2"><label for="cl2">Ελεύθερος χώρος γύρω από το τατάμι (χωρίς εμπόδια/αιχμηρές γωνίες)</label>
+    </div>
+    <div class="cl-item">
+      <input type="checkbox" id="cl3"><label for="cl3">Νύχια κομμένα, κοσμήματα αφαιρεμένα</label>
+    </div>
+    <div class="cl-item">
+      <input type="checkbox" id="cl4"><label for="cl4">Τζουντόγκι καθαρά και σε σωστό μέγεθος</label>
+    </div>
+    <div class="cl-item">
+      <input type="checkbox" id="cl5"><label for="cl5">Φαρμακείο πρώτων βοηθειών προσβάσιμο</label>
+    </div>
+    <div class="cl-item">
+      <input type="checkbox" id="cl6"><label for="cl6">Λίστα επικοινωνίας γονέων διαθέσιμη</label>
+    </div>
+  </div>
+</section>
+
+<section class="content-block" id="omades">
+  <p class="kicker">Πρακτική</p>
+  <h2>Ομαδοποίηση Αθλητών</h2>
+
+  <p>Το πώς χωρίζεις τα ζευγάρια είναι απόφαση ασφάλειας, όχι απλή διαχείριση τάξης.</p>
+
+  <ul class="points">
+    <li><strong>Μέγεθος και εμπειρία πάνω από ηλικία:</strong> δύο παιδιά ίδιας ηλικίας μπορεί να έχουν πολύ διαφορετικό σωματότυπο ή εμπειρία. Αυτό μετράει περισσότερο από τον αριθμό γενεθλίων.</li>
+    <li><strong>Όταν η διαφορά είναι αναπόφευκτη:</strong> σε μικρές ομάδες, ο πιο έμπειρος/μεγαλύτερος αναλαμβάνει ρητά τον ρόλο του «να προσέχει». Αυτό διδάσκεται και επιβραβεύεται.</li>
+    <li><strong>Εναλλαγή ζευγαριών:</strong> τακτική εναλλαγή αποτρέπει σταθερές δυναμικές εξουσίας ανάμεσα σε συγκεκριμένα παιδιά.</li>
+  </ul>
+
+  <div class="scenario">
+    <p class="stitle">🥋 Σενάριο για συζήτηση</p>
+    <p class="scase">Έχεις 11 παιδιά στην τάξη. Άρτιος αριθμός δεν βγαίνει, και ένα παιδί είναι πολύ πιο έμπειρο από όλους τους υπόλοιπους. Πώς οργανώνεις τα ζευγάρια;</p>
+    <details>
+      <summary>Δες μια πιθανή απάντηση</summary>
+      <p class="sanswer">Το πιο έμπειρο παιδί μπαίνει σε ρόλο «βοηθού» εκ περιτροπής με τον προπονητή, ή σχηματίζεται μία τριάδα όπου εναλλάσσονται δύο παιδιά σε ρόλο tori/uke ενώ το τρίτο παρατηρεί και δίνει feedback. Κανείς δε μένει εκτός.</p>
+    </details>
+
+  <div style="margin-top:14px; padding-top:14px; border-top:1px dashed var(--sage);">
+    <p class="scase"><strong>🔄 Ανατροπή:</strong> Κι αν αυτό το παιδί δεν νιώθει άνετα να δίνει feedback; Ή θέλει οπωσδήποτε να κάνει προπόνηση, όχι να παρατηρεί;</p>
+    <details>
+      <summary>Δες μια πιθανή απάντηση</summary>
+      <p class="sanswer">Ο ρόλος του «βοηθού» δεν είναι υποχρέωση. Είναι επιλογή, και πρέπει να ρωτηθεί, όχι να ανατεθεί. Αν το παιδί θέλει προπόνηση, μπαίνει κι αυτό στην εναλλαγή της τριάδας κανονικά, απλώς με πιο στενή επίβλεψη από την προπονήτρια στα σημεία όπου η διαφορά εμπειρίας μετράει περισσότερο (π.χ. ένταση σε ρίψεις). Η λύση δεν είναι να «χρησιμοποιήσεις» το πιο έμπειρο παιδί ως εργαλείο διαχείρισης της τάξης. Είναι να βρεις τρόπο ώστε όλοι, συμπεριλαμβανομένου αυτού, να έχουν ουσιαστικό χρόνο εξάσκησης.</p>
+    </details>
+  </div>
+</div>
+</section>
+
+<section>
+  <p class="checkpoint-kicker">⏸ Στάσου και σκέψου</p>
+  <div class="quiz" id="q2">
+    <p class="q-num">Έλεγχος κατανόησης</p>
+    <p class="q-text">Το βασικό κριτήριο δημιουργίας ζευγαριών προπόνησης θα πρέπει να είναι κυρίως:</p>
+    <button class="opt" data-correct="false">Η ηλικία</button>
+    <button class="opt" data-correct="true">Το μέγεθος και η εμπειρία</button>
+    <button class="opt" data-correct="false">Η σειρά εγγραφής στο μάθημα</button>
+    <div class="feedback"></div>
+  </div>
+</section>
+
+<section class="content-block" id="texnikes">
+  <p class="kicker">Πρακτική</p>
+  <h2>Επιλογή και Προτεραιότητα Τεχνικών</h2>
+
+  <p>Δεν διδάσκονται όλες οι τεχνικές το ίδιο νωρίς. Η ιεράρχηση βασίζεται σε τρία κριτήρια: <strong>ρίσκο τραυματισμού</strong>, <strong>απαιτούμενη σωματική/νοητική ωριμότητα</strong>, και <strong>πόσο συχνά χρησιμοποιείται ως βάση για άλλες τεχνικές</strong>.</p>
+
+  <ul class="points">
+    <li><strong>Πρώτη προτεραιότητα:</strong> ukemi (όλες οι μορφές), βασικές ρίψεις χαμηλού ρίσκου (π.χ. o-soto-gari, o-goshi με έλεγχο). Χτίζουν τη βάση για όλα τα υπόλοιπα.</li>
+    <li><strong>Δεύτερη προτεραιότητα:</strong> βασικά osaekomi-waza (καθηλώσεις): χαμηλό ρίσκο, διδάσκουν έλεγχο χωρίς την ένταση μιας ρίψης.</li>
+    <li><strong>Εισάγονται αργότερα:</strong> shime-waza (πνιγμοί) και kansetsu-waza (κλειδώματα αρθρώσεων στο BJJ) απαιτούν μεγαλύτερη ωριμότητα στην αναγνώριση του tap και στον αυτοέλεγχο της συναθλήτριας που εφαρμόζει την τεχνική.</li>
+    <li><strong>Καθυστερούν περισσότερο:</strong> τεχνικές υψηλού ρίσκου πρόσκρουσης (π.χ. μεγάλες ρίψεις με περιστροφή) μόνο όταν το ukemi είναι πλήρως αυτοματοποιημένο.</li>
+  </ul>
+
+  <p>Όταν μια νέα τεχνική εισάγεται ακολουθεί πάντα την ίδια προοδευτική πορεία:</p>
+
+  <div class="progression">
+    <div class="prog-step">
+      <div class="prog-num">1</div>
+      <div class="prog-body"><p><strong>Επίδειξη</strong>: αργά, χωρίς αντίσταση, με έμφαση στα σημεία ασφάλειας.</p></div>
+    </div>
+    <div class="prog-step">
+      <div class="prog-num">2</div>
+      <div class="prog-body"><p><strong>Επανάληψη σε ζευγάρια</strong>: χωρίς αντίσταση, με διόρθωση από τον προπονητή.</p></div>
+    </div>
+    <div class="prog-step">
+      <div class="prog-num">3</div>
+      <div class="prog-body"><p><strong>Ελεγχόμενη αντίσταση</strong>: ο συναθλητής προσφέρει μικρή, προκαθορισμένη αντίσταση.</p></div>
+    </div>
+    <div class="prog-step">
+      <div class="prog-num">4</div>
+      <div class="prog-body"><p><strong>Ελεύθερη εφαρμογή</strong>: η τεχνική εντάσσεται στο randori μόνο εδώ.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p class="checkpoint-kicker">⏸ Στάσου και σκέψου</p>
+  <div class="quiz" id="q3">
+    <p class="q-num">Έλεγχος κατανόησης</p>
+    <p class="q-text">Γιατί οι πνιγμοί (shime-waza) εισάγονται αργότερα από τις βασικές ρίψεις;</p>
+    <button class="opt" data-correct="false">Γιατί είναι λιγότερο σημαντικοί</button>
+    <button class="opt" data-correct="true">Γιατί απαιτούν μεγαλύτερη ωριμότητα στην αναγνώριση του tap και στον αυτοέλεγχο</button>
+    <button class="opt" data-correct="false">Γιατί δεν χρησιμοποιούνται σε αγώνες παίδων</button>
+    <div class="feedback"></div>
+  </div>
+</section>
+
+<section class="content-block" id="ektakti">
+  <p class="kicker">Πρακτική</p>
+  <h2>Πρωτόκολλο Έκτακτης Ανάγκης</h2>
+
+  <p>Ένα σαφές πρωτόκολλο δεν χρειάζεται να είναι πολύπλοκο. Χρειάζεται όμως να είναι γνωστό σε όλους πριν χρειαστεί ποτέ.</p>
+
+  <div class="alert-box">
+    <p class="ab-title">⚠ Τα τέσσερα βασικά βήματα</p>
+    <ul class="points" style="margin:0;">
+      <li><strong>Σταμάτα το μάθημα</strong>: άμεση παύση όλης της δραστηριότητας στο τατάμι, όχι μόνο του συγκεκριμένου ζευγαριού.</li>
+      <li><strong>Αξιολόγησε και φρόντισε</strong>: βασική εκτίμηση τραυματισμού, πρώτες βοήθειες αν χρειάζεται, φαρμακείο άμεσα προσβάσιμο.</li>
+      <li><strong>Ενημέρωσε</strong>: γονέας/κηδεμόνας ενημερώνεται άμεσα· ξεκάθαρο ποιος έχει αυτή την ευθύνη (όχι «κάποιος θα το κάνει»).</li>
+      <li><strong>Κατέγραψε</strong>: σύντομη γραπτή καταγραφή του περιστατικού την ίδια μέρα, όσο τα γεγονότα είναι νωπά.</li>
+    </ul>
+  </div>
+
+  <p>Καλή πρακτική: αυτά τα βήματα εξηγούνται σε κάθε νέο βοηθό/προπονητή πριν αναλάβει τάξη, όχι μόνο όταν συμβεί κάτι.</p>
+</section>
+
+<section class="content-block" id="goneis">
+  <p class="kicker">Πρακτική</p>
+  <h2>Επικοινωνία με Γονείς</h2>
+
+  <ul class="points">
+    <li><strong>Πριν την πρώτη συμμετοχή:</strong> σύντομη ενημέρωση για την πολιτική ασφάλειας: τι είναι το tap, γιατί χρησιμοποιείται, γιατί είναι θετικό σημάδι όχι αρνητικό (σύνδεση με το «tap talk» της Ενότητας 2).</li>
+    <li><strong>Μετά από ένα δύσκολο περιστατικό:</strong> σαφής, έγκαιρη ενημέρωση: τι συνέβη, τι έγινε, τι θα αλλάξει (αν χρειάζεται).</li>
+    <li><strong>Σε τακτική βάση:</strong> ανοιχτή γραμμή επικοινωνίας. Οι γονείς που καταλαβαίνουν το «γιατί» πίσω από τους κανόνες είναι σύμμαχοι, όχι εμπόδιο.</li>
+  </ul>
+</section>
+
+<div class="discussion">
+  <h2>Πώς σχεδιάζετε το δικό σας μάθημα;</h2>
+
+  <p class="prompt-label">Επιλογή Α</p>
+  <p class="prompt">«Πώς μοιράζετε τον χρόνο σας μέσα σε ένα τυπικό μάθημα; Τι αλλάζετε ανάλογα με την ηλικία της ομάδας;»</p>
+
+  <p class="prompt-label">Επιλογή Β</p>
+  <p class="prompt">«Πώς αποφασίζετε πότε μια ομάδα είναι έτοιμη για μια νέα, πιο απαιτητική τεχνική;»</p>
+
+  <p class="prompt-label">Επιλογή Γ</p>
+  <p class="prompt">«Έχετε αντιμετωπίσει ποτέ πραγματικό περιστατικό έκτακτης ανάγκης; Τι θα κάνατε διαφορετικά τώρα;»</p>
+
+  <div class="step"><span class="snum">1</span><p>Σχηματισμός μικρών ομάδων (3–4 άτομα).</p></div>
+  <div class="step"><span class="snum">2</span><p>Κάθε ομάδα καταγράφει 2 παραδείγματα από τη δική της εμπειρία.</p></div>
+  <div class="step"><span class="snum">3</span><p>Σύντομη παρουσίαση &amp; κοινή συζήτηση στην ολομέλεια.</p></div>
+
+  <div class="keywords">
+    <p class="kw-title">Λέξεις-κλειδιά για να κρατήσετε τη συζήτηση εστιασμένη</p>
+    <div class="kw-list">
+      <span class="kw-chip">uchi-komi</span>
+      <span class="kw-chip">nage-komi</span>
+      <span class="kw-chip">προτεραιότητα τεχνικών</span>
+      <span class="kw-chip">ζευγάρωμα</span>
+      <span class="kw-chip">πρωτόκολλο ασφαλείας</span>
+      <span class="kw-chip">επικοινωνία γονέων</span>
+      <span class="kw-chip">αναλογία προπονητή</span>
+    </div>
+  </div>
+</div>
+
+<section id="faq">
+  <h2>Συχνές Ερωτήσεις</h2>
+  <div class="faqs">
+
+    <details class="faq-item">
+      <summary>Πόσο συχνά πρέπει να επαναλαμβάνεται το ukemi, ακόμα και σε προχωρημένες ομάδες;</summary>
+      <div class="faq-body">
+        <p>Σε κάθε μάθημα, χωρίς εξαίρεση. Το ukemi δεν είναι κάτι που «μαθαίνεται μια φορά». Είναι δεξιότητα που φθίνει χωρίς επανάληψη, και το ρίσκο τραυματισμού αυξάνεται ακριβώς όταν υποθέτουμε ότι δεν χρειάζεται πια εξάσκηση.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Τι κάνω αν δεν έχω αρκετό χώρο ή εξοπλισμό για τον αριθμό παιδιών;</summary>
+      <div class="faq-body">
+        <p>Η ασφάλεια προηγείται της χωρητικότητας: καλύτερα λιγότερα παιδιά ανά τμήμα ή εναλλασσόμενες ομάδες παρά συνωστισμός στο τατάμι. Αν ο εξοπλισμός είναι περιορισμένος, οργανώστε σταθμούς εργασίας (ένα τμήμα σε uchi-komi, ένα σε ukemi) αντί όλοι να κάνουν το ίδιο ταυτόχρονα.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Πώς ξέρω πότε μια ομάδα είναι έτοιμη να περάσει σε randori με μια νέα τεχνική;</summary>
+      <div class="faq-body">
+        <p>Όχι με βάση τον χρόνο, αλλά με βάση την ποιότητα εκτέλεσης στο στάδιο της ελεγχόμενης αντίστασης. Αν η τεχνική εκτελείται με σταθερότητα και τα δύο παιδιά νιώθουν άνετα, είναι έτοιμη. Αν υπάρχει δισταγμός ή ασυνέπεια, μένει ένα στάδιο πίσω λίγο ακόμα.</p>
+      </div>
+    </details>
+
+  </div>
+</section>
+
+<section>
+  <h2>Πηγές</h2>
+  <div class="sources">
+
+    <div class="source-item">
+      <span class="snum2">01</span>
+      <div class="sbody">
+        <a href="https://schools.ijf.org/toolkit/organizer/organization/judo-in-schools-organization-structure/1432" target="_blank" rel="noopener">Judo in Schools - Organization Structure</a>
+        <span class="spublisher">IJF Judo for Children Commission</span>
+        <span class="snote">Ενδεικτικές αναλογίες εξοπλισμού και χώρου τατάμι ανά αριθμό παιδιών.</span>
+      </div>
+    </div>
+
+    <div class="source-item">
+      <span class="snum2">02</span>
+      <div class="sbody">
+        <a href="https://schools.ijf.org/method" target="_blank" rel="noopener">IJF Judo in Schools - Method</a>
+        <span class="spublisher">IJF Judo for Children Commission</span>
+        <span class="snote">Παιδαγωγική μεθοδολογία και δομή μαθήματος για παιδιά.</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="ask">
+  <h2>Έχεις απορία για αυτή την ενότητα;</h2>
+  <p class="sub2">Άφησέ την εδώ ανώνυμα. Θα τις διαβάσω όλες πριν το επόμενο μάθημα και θα ξεκινήσουμε με τις απαντήσεις.</p>
+  <div class="form-frame-holder">
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdvrMXgqSWPx89b0vqXCfCyniSNB5FCv4_z3V0q9hJXc1Pf7A/viewform?usp=dialog">Loading…</iframe>
+  </div>
+</section>
+
+<div class="closing">
+  <p class="next-label">Επόμενη ενότητα</p>
+  <p class="next-title">Ενότητα 4</p>
+</div>
+</div>
+
+<footer class="pagefoot">ΕΝΟΤΗΤΑ 3 · ΣΧΕΔΙΑΣΜΟΣ ΑΣΦΑΛΟΥΣ ΠΡΟΠΟΝΗΤΙΚΗΣ ΜΟΝΑΔΑΣ</footer>
+
+<script>
+  document.querySelectorAll('.quiz').forEach(function(quiz){
+    var opts = quiz.querySelectorAll('.opt');
+    var feedback = quiz.querySelector('.feedback');
+    var answered = false;
+    opts.forEach(function(opt){
+      opt.addEventListener('click', function(){
+        if(answered) return;
+        answered = true;
+        var isCorrect = opt.getAttribute('data-correct') === 'true';
+        opts.forEach(function(o){
+          o.disabled = true;
+          if(o.getAttribute('data-correct') === 'true'){
+            o.classList.add('correct');
+          } else if(o === opt && !isCorrect){
+            o.classList.add('incorrect');
+          }
+        });
+        feedback.textContent = isCorrect
+          ? "Σωστά! Ακριβώς αυτό."
+          : "Όχι ακριβώς. Η σωστή επιλογή είναι τονισμένη παραπάνω.";
+        feedback.className = 'feedback show ' + (isCorrect ? 'ok' : 'no');
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

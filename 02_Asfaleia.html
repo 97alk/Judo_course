@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ενότητα 2: Αρχές Ασφάλειας στο Παιδικό Τζούντο – Ζίου Ζίτσου</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap');
+
+
+  :root{
+    --ink:#262320;
+    --cream:#F6F1E8;
+    --cream-panel:#FFFFFF;
+    --burgundy:#6E1F2B;
+    --burgundy-deep:#4E1620;
+    --gold:#B98A3D;
+    --sage:#4C6B5A;
+    --sage-panel:#EEF3F0;
+    --line: rgba(38,35,32,0.12);
+    --radius: 14px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+
+  header.mod{
+    background:var(--burgundy);
+    background-image: radial-gradient(circle at 85% 20%, rgba(255,255,255,0.06), transparent 55%);
+    color:#fff;
+    padding:44px 24px 32px;
+  }
+  header.mod .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:#E8C98F;
+    margin:0 0 10px;
+  }
+  header.mod h1{
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    font-size:clamp(28px,5vw,40px);
+    margin:0 0 8px;
+    letter-spacing:-0.01em;
+  }
+  header.mod .sub{
+    color:#E9D9CE; font-size:15.5px; margin:0 0 22px; max-width:560px;
+  }
+  header.mod .meta{
+    display:flex; gap:18px; font-family:'JetBrains Mono', monospace;
+    font-size:12px; color:rgba(255,255,255,0.75); margin-bottom:20px;
+    letter-spacing:0.04em;
+  }
+  .belt-track{
+    max-width:760px;margin:0 auto;
+    display:flex; gap:5px; align-items:center;
+  }
+  .belt-stripe{
+    height:7px; flex:1; border-radius:4px;
+    background: rgba(255,255,255,0.18);
+  }
+  .belt-stripe.current{background:var(--gold);}
+  .belt-track .lbl{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px; color:rgba(255,255,255,0.75);
+    margin-top:8px; letter-spacing:0.04em;
+  }
+
+  section{padding:44px 0 0;}
+  section h2{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:25px;
+    margin:0 0 6px;
+    color:var(--burgundy-deep);
+  }
+  section .kicker{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--gold); margin:0 0 8px; font-weight:600;
+  }
+  p{margin:0 0 16px; font-size:16px;}
+  ul.points{margin:12px 0 16px; padding-left:0; list-style:none;}
+  ul.points li{
+    position:relative; padding-left:28px; margin-bottom:12px; font-size:16px;
+  }
+  ul.points li::before{
+    content:"";
+    position:absolute; left:0; top:9px;
+    width:9px; height:9px; border-radius:2px;
+    background:var(--gold);
+    transform:rotate(45deg);
+  }
+
+  .objectives{
+    background:var(--cream-panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:26px 28px;
+    margin-bottom:8px;
+  }
+  .objectives .obj-item{
+    display:flex; gap:14px; align-items:flex-start;
+    padding:12px 0; border-bottom:1px solid var(--line);
+  }
+  .objectives .obj-item:last-child{border-bottom:none; padding-bottom:0;}
+  .objectives .obj-item:first-child{padding-top:0;}
+  .objectives .check{
+    flex:0 0 22px; height:22px; border-radius:50%;
+    background:var(--sage-panel); color:var(--sage);
+    display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:700; margin-top:1px;
+  }
+  .objectives .obj-item p{margin:0; font-size:15.5px;}
+
+  .agenda{margin:6px 0 8px;}
+  .agenda-item{
+    display:flex; align-items:center; gap:16px;
+    background:var(--cream-panel);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:14px 18px; margin-bottom:8px;
+  }
+  .agenda-item .num{
+    font-family:'Fraunces', serif; font-weight:700; font-size:20px;
+    color:var(--gold); flex:0 0 30px;
+  }
+  .agenda-item .txt{flex:1; font-size:15px;}
+  .agenda-item .time{
+    font-family:'JetBrains Mono', monospace; font-size:13px;
+    color:var(--sage); background:var(--sage-panel);
+    padding:4px 10px; border-radius:100px; flex:0 0 auto;
+  }
+
+  .content-block{margin-bottom:36px;}
+  .visual-note{
+    display:flex; align-items:center; gap:10px;
+    background:var(--sage-panel); color:var(--sage);
+    border:1px dashed var(--sage);
+    border-radius:10px; padding:14px 16px; font-size:14px;
+    margin-top:6px;
+  }
+
+  .nuance{
+    display:flex; gap:12px; align-items:flex-start;
+    background:#FBF3E3; border:1px solid var(--gold);
+    border-radius:10px; padding:16px 18px; margin-top:14px;
+  }
+  .nuance .mark{
+    flex:0 0 22px; font-size:17px; line-height:1.3; color:var(--gold);
+  }
+  .nuance p{margin:0; font-size:14.5px; color:#5B4A2A; line-height:1.55;}
+  .nuance p strong{color:#4A3A1E;}
+  .nuance .src{
+    display:block; margin-top:6px; font-family:'JetBrains Mono', monospace;
+    font-size:12px; color:#8A7040;
+  }
+
+  .discussion{
+    background:var(--burgundy-deep);
+    color:#fff;
+    border-radius:var(--radius);
+    padding:30px 30px 26px;
+    margin:16px 0 8px;
+  }
+  .discussion h2{color:#fff;}
+  .discussion .kicker{color:#E8C98F;}
+  .discussion .prompt{
+    font-family:'Fraunces', serif; font-size:19px; font-style:italic;
+    color:#F3E7D9; margin:14px 0 22px; line-height:1.5;
+  }
+  .discussion .step{
+    display:flex; gap:14px; align-items:flex-start; margin-bottom:14px;
+  }
+  .discussion .step .snum{
+    flex:0 0 26px; height:26px; border-radius:50%;
+    background:var(--gold); color:var(--burgundy-deep);
+    display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:700;
+  }
+  .discussion .step p{margin:0; color:#E9D9CE; font-size:15px;}
+
+  .key-concept{
+    background:var(--cream-panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:28px 28px 24px;
+    box-shadow:0 1px 2px rgba(0,0,0,0.03);
+    margin:8px 0 8px;
+  }
+  .key-concept .tag{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--burgundy-deep); color:#fff;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px; font-weight:500; letter-spacing:0.06em;
+    text-transform:uppercase;
+    padding:7px 14px; border-radius:100px;
+    margin-bottom:16px;
+  }
+  .key-concept ul.points{margin:0;}
+  .key-concept ul.points li:last-child{margin-bottom:0;}
+
+  .quiz{
+    background:var(--cream-panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:26px 28px 24px;
+    margin:16px 0 28px;
+  }
+  .quiz .q-num{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px; color:var(--sage); letter-spacing:0.08em;
+    text-transform:uppercase; margin-bottom:6px;
+  }
+  .quiz .q-text{font-weight:600; font-size:16.5px; margin-bottom:16px;}
+  .opt{
+    display:block; width:100%; text-align:left;
+    background:var(--cream); border:1px solid var(--line);
+    border-radius:10px; padding:13px 16px; margin-bottom:10px;
+    font-family:'Inter',sans-serif; font-size:15px; color:var(--ink);
+    cursor:pointer; transition:border-color .15s, background .15s;
+  }
+  .opt:hover{border-color:var(--gold);}
+  .opt.correct{background:#EBF2ED; border-color:var(--sage); color:var(--sage); font-weight:600;}
+  .opt.incorrect{background:#F7E9E7; border-color:#B34A3B; color:#8C382C; font-weight:600;}
+  .opt[disabled]{cursor:default;}
+  .feedback{
+    margin-top:10px; font-size:14.5px; padding:12px 14px;
+    border-radius:8px; display:none;
+  }
+  .feedback.show{display:block;}
+  .feedback.ok{background:#EBF2ED; color:var(--sage);}
+  .feedback.no{background:#F7E9E7; color:#8C382C;}
+
+  .faq{margin:6px 0 8px;}
+  .faq-item{
+    background:var(--cream-panel);
+    border:1px solid var(--line);
+    border-radius:10px;
+    margin-bottom:10px;
+    overflow:hidden;
+  }
+  .faq-item summary{
+    list-style:none;
+    cursor:pointer;
+    padding:16px 20px;
+    font-weight:600;
+    font-size:15.5px;
+    color:var(--burgundy-deep);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+  }
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary::after{
+    content:"+";
+    font-family:'JetBrains Mono', monospace;
+    font-size:20px;
+    color:var(--gold);
+    flex:0 0 auto;
+    transition:transform .15s;
+  }
+  .faq-item[open] summary::after{ transform:rotate(45deg); }
+  .faq-item .faq-body{
+    padding:0 20px 18px;
+    font-size:15px;
+    color:var(--ink);
+  }
+  .faq-item .faq-body p{margin:0 0 10px;}
+  .faq-item .faq-body p:last-child{margin-bottom:0;}
+
+  .sources{margin:6px 0 8px;}
+  .source-item{
+    display:flex; gap:14px;
+    background:var(--cream-panel);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:16px 18px;
+    margin-bottom:10px;
+  }
+  .source-item .snum2{
+    flex:0 0 24px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px; font-weight:700; color:var(--gold);
+  }
+  .source-item .sbody a{
+    color:var(--burgundy-deep);
+    font-weight:600;
+    font-size:15px;
+    text-decoration:none;
+    border-bottom:1px solid var(--gold);
+  }
+  .source-item .sbody a:hover{ color:var(--burgundy); }
+  .source-item .sbody .spublisher{
+    display:block; font-size:13px; color:var(--sage);
+    margin-top:2px; font-family:'JetBrains Mono', monospace;
+  }
+  .source-item .sbody .snote{
+    display:block; font-size:13.5px; color:var(--ink);
+    margin-top:6px; opacity:0.85;
+  }
+  .sources-addnote{
+    font-family:'JetBrains Mono', monospace; font-size:12px;
+    color:var(--sage); background:var(--sage-panel);
+    border:1px dashed var(--sage); border-radius:10px;
+    padding:12px 16px; margin-top:6px;
+  }
+
+  .ask{
+    background:var(--burgundy-deep);
+    color:#fff;
+    border-radius:var(--radius);
+    padding:32px 30px;
+    margin-top:36px;
+  }
+  .ask h2{color:#fff; margin-bottom:8px;}
+  .ask p.sub2{color:#E9D9CE; font-size:15px; margin-bottom:20px;}
+  .ask .form-frame-holder{
+    background:#fff; border-radius:10px; overflow:hidden;
+    min-height:420px;
+  }
+  .ask .form-frame-holder iframe{
+    display:block; width:100%; height:420px; border:0;
+  }
+
+  .closing{
+    text-align:center; padding:40px 20px; margin-top:8px;
+    border-top:1px solid var(--line);
+  }
+  .closing p.next-label{
+    font-family:'JetBrains Mono', monospace; font-size:12px;
+    letter-spacing:0.1em; text-transform:uppercase; color:var(--gold);
+    margin-bottom:8px;
+  }
+  .closing p.next-title{
+    font-family:'Fraunces', serif; font-size:20px; font-weight:600;
+    color:var(--burgundy-deep); margin:0;
+  }
+
+  footer.pagefoot{
+    text-align:center; padding:24px 0 0; color:rgba(38,35,32,0.5);
+    font-size:13px; font-family:'JetBrains Mono', monospace;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+  }
+
+  /* ---- Sticky mini-nav ---- */
+  .mininav{
+    position:sticky; top:0; z-index:20;
+    background:rgba(246,241,232,0.94);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .mininav-inner{
+    max-width:760px; margin:0 auto; padding:0 24px;
+    display:flex; gap:4px; overflow-x:auto;
+    -ms-overflow-style:none; scrollbar-width:none;
+  }
+  .mininav-inner::-webkit-scrollbar{display:none;}
+  .mininav a{
+    flex:0 0 auto;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px; letter-spacing:0.03em;
+    color:var(--ink); opacity:0.65;
+    text-decoration:none;
+    padding:12px 10px;
+    border-bottom:2px solid transparent;
+    white-space:nowrap;
+  }
+  .mininav a:hover{ opacity:1; border-bottom-color:var(--gold); }
+
+  /* ---- Timeline ---- */
+  .timeline{ position:relative; margin:20px 0 8px; padding-left:26px; }
+  .timeline::before{
+    content:""; position:absolute; left:6px; top:6px; bottom:6px;
+    width:2px; background:var(--line);
+  }
+  .tl-item{ position:relative; padding-bottom:26px; }
+  .tl-item:last-child{ padding-bottom:0; }
+  .tl-item::before{
+    content:""; position:absolute; left:-26px; top:3px;
+    width:13px; height:13px; border-radius:50%;
+    background:var(--gold); border:3px solid var(--cream);
+    box-shadow:0 0 0 1px var(--gold);
+  }
+  .tl-year{
+    font-family:'JetBrains Mono', monospace; font-size:12.5px;
+    font-weight:700; color:var(--gold); letter-spacing:0.04em;
+    margin-bottom:3px;
+  }
+  .tl-title{
+    font-family:'Fraunces', serif; font-weight:600; font-size:17px;
+    color:var(--burgundy-deep); margin:0 0 4px;
+  }
+  .tl-body{ font-size:15px; margin:0; color:var(--ink); }
+  .tl-body p{ margin:0 0 4px; font-size:15px; }
+
+  /* ---- Nuance as collapsible <details> ---- */
+  details.nuance{ padding:0; overflow:hidden; }
+  details.nuance summary{
+    list-style:none; cursor:pointer;
+    display:flex; gap:10px; align-items:center;
+    padding:14px 18px; font-weight:600; font-size:14.5px; color:#4A3A1E;
+  }
+  details.nuance summary::-webkit-details-marker{ display:none; }
+  details.nuance summary::after{
+    content:"+"; margin-left:auto; font-family:'JetBrains Mono', monospace;
+    font-size:18px; color:var(--gold); transition:transform .15s;
+  }
+  details.nuance[open] summary::after{ transform:rotate(45deg); }
+  details.nuance .nuance-body{ padding:0 18px 16px 46px; }
+  details.nuance .nuance-body p{ margin:0; font-size:14.5px; color:#5B4A2A; line-height:1.55; }
+  details.nuance .nuance-body .src{
+    display:block; margin-top:8px; font-family:'JetBrains Mono', monospace;
+    font-size:12px; color:#8A7040;
+  }
+
+  /* ---- Scenario check (philosophy sections) ---- */
+  .scenario{
+    background:var(--sage-panel); border:1px solid var(--sage);
+    border-radius:10px; padding:18px 20px; margin-top:16px;
+  }
+  .scenario .stitle{
+    font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:0.08em;
+    text-transform:uppercase; color:var(--sage); font-weight:700; margin-bottom:8px;
+  }
+  .scenario p.scase{ font-size:15px; margin:0 0 10px; }
+  .scenario details{ margin-top:6px; }
+  .scenario summary{
+    cursor:pointer; font-weight:600; font-size:14px; color:var(--sage);
+    list-style:none;
+  }
+  .scenario summary::-webkit-details-marker{ display:none; }
+  .scenario summary::before{ content:"▸ "; }
+  .scenario details[open] summary::before{ content:"▾ "; }
+  .scenario .sanswer{ font-size:14.5px; margin-top:8px; color:#33473C; }
+
+  /* ---- Compare table ---- */
+  .compare{
+    width:100%; border-collapse:collapse; margin:14px 0 8px;
+    font-size:14.5px; background:var(--cream-panel);
+    border:1px solid var(--line); border-radius:var(--radius); overflow:hidden;
+  }
+  .compare th, .compare td{ padding:12px 14px; text-align:left; border-bottom:1px solid var(--line); }
+  .compare th{
+    font-family:'JetBrains Mono', monospace; font-size:11.5px; letter-spacing:0.05em;
+    text-transform:uppercase; color:#fff; background:var(--burgundy-deep);
+  }
+  .compare td:first-child, .compare th:first-child{ font-weight:600; color:var(--burgundy-deep); width:34%; }
+  .compare tr:last-child td{ border-bottom:none; }
+
+  /* ---- Inline checkpoint label ---- */
+  .checkpoint-kicker{
+    font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--sage); margin:0 0 8px; font-weight:700;
+  }
+
+  /* ---- Discussion: alt prompts & keyword chips ---- */
+  .discussion .prompt-label{
+    font-family:'JetBrains Mono', monospace; font-size:11.5px; letter-spacing:0.06em;
+    text-transform:uppercase; color:var(--gold); margin:18px 0 4px; font-weight:700;
+  }
+  .discussion .prompt-label:first-of-type{ margin-top:6px; }
+  .discussion .keywords{
+    margin-top:20px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.15);
+  }
+  .discussion .kw-title{
+    font-family:'JetBrains Mono', monospace; font-size:11.5px; letter-spacing:0.06em;
+    text-transform:uppercase; color:#E8C98F; margin:0 0 10px; font-weight:700;
+  }
+  .discussion .kw-list{ display:flex; flex-wrap:wrap; gap:8px; }
+  .discussion .kw-chip{
+    font-family:'JetBrains Mono', monospace; font-size:12.5px;
+    background:rgba(255,255,255,0.1); color:#F3E7D9;
+    border:1px solid rgba(255,255,255,0.25); border-radius:100px;
+    padding:5px 12px;
+  }
+</style>
+</head>
+<body>
+<header class="mod">
+  <div class="wrap" style="padding:0;">
+    <p class="eyebrow">Ενότητα 2 / 8</p>
+    <h1>Αρχές Ασφάλειας στο Παιδικό Τζούντο - Ζίου Ζίτσου</h1>
+    <p class="sub">Πρακτική και συναισθηματική διάσταση της ασφάλειας.</p>
+    <div class="meta">
+      <span>⏱ 2 ώρες</span>
+      <span>📖 Σύγχρονη διάλεξη</span>
+    </div>
+    <div class="belt-track">
+      <div class="belt-stripe"></div>
+      <div class="belt-stripe current"></div>
+      <div class="belt-stripe"></div>
+      <div class="belt-stripe"></div>
+      <div class="belt-stripe"></div>
+      <div class="belt-stripe"></div>
+      <div class="belt-stripe"></div>
+      <div class="belt-stripe"></div>
+    </div>
+    <p class="lbl">ΕΝΟΤΗΤΑ 2 ΑΠΟ 8</p>
+  </div>
+</header>
+
+<nav class="mininav">
+  <div class="mininav-inner">
+    <a href="#stoxoi">Στόχοι</a>
+    <a href="#eaftou">Ασφάλεια Εαυτού</a>
+    <a href="#synathliton">Συναθλητές</a>
+    <a href="#synaisthimatiki">Συναίσθημα</a>
+    <a href="#erevna">Πηγές</a>
+    <a href="#faq">FAQ</a>
+  </div>
+</nav>
+
+<div class="wrap">
+<section id="stoxoi">
+  <h2>Μαθησιακοί Στόχοι</h2>
+  <p>Με την ολοκλήρωση του μαθήματος, οι προπονητές/τριες θα μπορούν να:</p>
+  <div class="objectives">
+    <div class="obj-item">
+      <div class="check">✓</div>
+      <p>Διδάσκουν και εφαρμόζουν συστηματικά τα βασικά ukemi και το tap ως θεμέλιο ασφάλειας.</p>
+    </div>
+    <div class="obj-item">
+      <div class="check">✓</div>
+      <p>Καθιερώνουν σαφείς κανόνες σωματικής ασφάλειας μεταξύ συναθλητών στο randori.</p>
+    </div>
+    <div class="obj-item">
+      <div class="check">✓</div>
+      <p>Αναγνωρίζουν και διαχειρίζονται τη συναισθηματική διάσταση της ασφάλειας στην τάξη.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Δομή Ενότητας</h2>
+  <div class="agenda">
+    <div class="agenda-item"><span class="num">01</span><span class="txt">Ασφάλεια Εαυτού: Ukemi και Tap</span><span class="time">15'</span></div>
+    <div class="agenda-item"><span class="num">02</span><span class="txt">Ασφάλεια Συναθλητών</span><span class="time">20'</span></div>
+    <div class="agenda-item"><span class="num">03</span><span class="txt">Η Συναισθηματική Διάσταση</span><span class="time">25'</span></div>
+    <div class="agenda-item"><span class="num">04</span><span class="txt">Από το Judo στο Jiu-Jitsu: Maeda, οικογένεια Gracie, BJJ</span><span class="time">25'</span></div>
+    <div class="agenda-item"><span class="num">05</span><span class="txt">Σύγχρονες τάσεις: άθλημα, αυτοάμυνα, παιδεία</span><span class="time">20'</span></div>
+    <div class="agenda-item"><span class="num">06</span><span class="txt">Συζήτηση ομάδας &amp; ερωτήσεις</span><span class="time">15'</span></div>
+  </div>
+</section>
+
+<section class="content-block" id="eaftou">
+  <p class="kicker">Πυλώνας 1</p>
+  <h2>Ασφάλεια Εαυτού: Ukemi και Tap</h2>
+
+  <figure style="max-width: 260px; margin: 0 0 16px 20px; float: right;">
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Ushiro_ukemi.jpg" alt="Ushiro ukemi - πτώση προς τα πίσω" style="width: 100%; border-radius: 8px;">
+    <figcaption style="font-family: 'Georgia', serif; font-style: italic; font-size: 13px; color: #555; margin-top: 6px;">Ushiro ukemi: η βάση της ασφαλούς πτώσης</figcaption>
+  </figure>
+
+  <p>Πριν μάθει κανείς να ρίχνει, μαθαίνει να πέφτει. Το ukemi δεν είναι απλώς μια τεχνική ανάμεσα σε άλλες· είναι η προϋπόθεση για να μπορεί ένα παιδί να συμμετέχει με ασφάλεια σε οτιδήποτε άλλο ακολουθήσει. Στο BJJ, το αντίστοιχο θεμέλιο είναι το <strong>tap</strong>: το σήμα που σταματά αμέσως κάθε τεχνική, χωρίς καμία εξαίρεση.</p>
+
+  <ul class="points">
+    <li><strong>Ukemi πρώτα, πάντα:</strong> κανένα παιδί δεν μπαίνει σε randori πριν περάσει επαρκή ώρες σε ushiro, yoko και mae ukemi σε χαμηλή ένταση.</li>
+    <li><strong>Το tap δεν διαπραγματεύεται:</strong> μόλις χτυπηθεί το tap (στο σώμα, στο tatami, ή προφορικά). Η τεχνική σταματά αμέσως, χωρίς καθυστέρηση «για ένα δευτερόλεπτο ακόμα».</li>
+    <li><strong>Το tap δεν είναι ήττα:</strong> είναι εργαλείο. Ένα παιδί που κάνει tap νωρίς και συχνά είναι πιο ασφαλές από ένα παιδί που φοβάται να το κάνει.</li>
+  </ul>
+
+  <details class="nuance">
+    <summary><span class="mark">🗣</span> «The Tap Talk» η εισαγωγική συζήτηση</summary>
+    <div class="nuance-body">
+      <p>Πριν από την πρώτη επαφή στο tatami, κάθε νέο παιδί περνά από αυτή τη σύντομη συζήτηση: «Το tap είναι υπερδύναμη, όχι αδυναμία. Αν νιώσεις πόνο, δυσφορία ή ότι κάτι δεν πάει καλά, χτυπάς, λες δυνατά "στοπ", και ο συμπαίκτης σου σταματά αμέσως. Πάντα. Χωρίς εξαιρέσεις, χωρίς ντροπή.» Η επανάληψη αυτής της φράσης σε κάθε νέο κύκλο μαθημάτων χτίζει την κουλτούρα πριν χρειαστεί ποτέ να εφαρμοστεί.</p>
+    </div>
+  </details>
+</section>
+
+<section>
+  <p class="checkpoint-kicker">⏸ Στάσου και σκέψου</p>
+  <div class="quiz" id="q1">
+    <p class="q-num">Έλεγχος κατανόησης</p>
+    <p class="q-text">Ποια είναι η σωστή αντίδραση όταν ένας αθλητής κάνει tap;</p>
+    <button class="opt" data-correct="false">Η τεχνική σταματά μετά από 1-2 δευτερόλεπτα</button>
+    <button class="opt" data-correct="true">Η τεχνική σταματά αμέσως, χωρίς καθυστέρηση</button>
+    <button class="opt" data-correct="false">Εξαρτάται από την ένταση της τεχνικής</button>
+    <div class="feedback"></div>
+  </div>
+</section>
+
+<section class="content-block" id="synathliton">
+  <p class="kicker">Πυλώνας 2</p>
+  <h2>Ασφάλεια Συναθλητών</h2>
+
+  <p>Η ασφάλεια δεν σταματά στο δικό σου σώμα. Κάθε ρίψη, κάθε λαβή, κάθε κράτημα έχει μία συναθλήτρια στην άλλη άκρη και αυτή η συναθλήτρια είναι συνεργάτης στην εξέλιξή σου, όχι στόχος για να «κερδίσεις».</p>
+
+  <ul class="points">
+    <li><strong>Κράτα πάντα το μανίκι:</strong> στη ρίψη, το μανίκι (ή η λαβή ελέγχου) δεν αφήνεται ποτέ. Καθοδηγεί την πτώση του συναθλητή και προλαβαίνει ανεξέλεγκτη πρόσκρουση.</li>
+    <li><strong>Ποτέ 100%:</strong> στο randori με νεότερους ή λιγότερο έμπειρους συναθλητές, η ένταση προσαρμόζεται πάντα προς τα κάτω. Δεν παλεύεις σαν να είσαι σε τελικό αγώνα.</li>
+    <li><strong>Σεβασμός στο όριο του φίλου σου:</strong> το πόσο σφιχτά, πόσο γρήγορα, πόσο δυνατά καθορίζεται από τον πιο αδύναμο κρίκo της αλληλεπίδρασης, όχι από τον πιο δυνατό.</li>
+  </ul>
+
+  <div class="scenario">
+    <p class="stitle">🥋 Σενάριο για συζήτηση</p>
+    <p class="scase">Ένα παιδί ρίχνει επανειλημμένα τον συναθλητή του χωρίς να κρατά το μανίκι, «για να φανεί» πιο δυνατό. Πώς παρεμβαίνεις;</p>
+    <details>
+      <summary>Δες μια πιθανή απάντηση</summary>
+      <p class="sanswer">Σταματάς αμέσως το ζευγάρι, εξηγείς ότι το κράτημα του μανικιού δεν είναι προαιρετική λεπτομέρεια αλλά μέρος της τεχνικής, και επαναλαμβάνεις τη ρίψη αργά, με έλεγχο, πριν επιτρέψεις να συνεχίσουν.</p>
+    </details>
+  </div>
+</section>
+
+<section>
+  <p class="checkpoint-kicker">⏸ Στάσου και σκέψου</p>
+  <div class="quiz" id="q2">
+    <p class="q-num">Έλεγχος κατανόησης</p>
+    <p class="q-text">Στο randori με λιγότερο έμπειρο συναθλητή, η ένταση πρέπει να:</p>
+    <button class="opt" data-correct="false">Παραμένει ίδια με έναν έμπειρο αντίπαλο</button>
+    <button class="opt" data-correct="true">Προσαρμόζεται προς τα κάτω</button>
+    <button class="opt" data-correct="false">Αυξάνεται για να μάθει γρήγορα</button>
+    <div class="feedback"></div>
+  </div>
+</section>
+
+<section class="content-block" id="synaisthimatiki">
+  <p class="kicker">Πυλώνας 3</p>
+  <h2>Η Συναισθηματική Διάσταση</h2>
+
+  <p>Η σωματική ασφάλεια είναι η μισή εικόνα. Ένα παιδί μπορεί να μην τραυματιστεί ποτέ σωματικά και παρ' όλα αυτά να νιώθει ανασφαλές, φοβισμένο, ή απομονωμένο στην τάξη. Αυτός ο πυλώνας καλύπτει πέντε συνήθεις προκλήσεις:</p>
+
+  <ul class="points">
+    <li><strong>Φόβος να κάνεις tap:</strong> η πίεση των συνομηλίκων μπορεί να κάνει ένα παιδί να αποφύγει το tap «για να μη φανεί αδύναμο». Ακριβώς το αντίθετο από αυτό που θέλουμε να μάθει.</li>
+    <li><strong>Διαχείριση απογοήτευσης:</strong> μετά από μια ήττα ή ένα submission, η αντίδραση του παιδιού (θυμός, κλάμα, απόσυρση) χρειάζεται καθοδήγηση, όχι αγνόηση.</li>
+    <li><strong>Αναγνώριση δυσφορίας σε συναθλητή:</strong> ένα παιδί που «παγώνει», αποφεύγει βλεμματική επαφή, ή σιωπά ασυνήθιστα μπορεί να επικοινωνεί κάτι που δεν λέει με λόγια.</li>
+    <li><strong>Χτίσιμο εμπιστοσύνης πριν την ένταση:</strong> η ψυχολογική ασφάλεια προηγείται της σωματικής ρίσκο-ανάληψης. Ένα παιδί που δεν εμπιστεύεται την ομάδα δεν μαθαίνει να ρισκάρει σωματικά με άνεση.</li>
+    <li><strong>Ο ρόλος του προπονητή:</strong> ο τόνος και η αντίδραση της προπονήτριας τη στιγμή που συμβαίνει κάτι δύσκολο είτε επιβεβαιώνει είτε υπονομεύει ό,τι έχει διδαχθεί στο tap talk.</li>
+  </ul>
+
+  <div class="scenario">
+    <p class="stitle">🥋 Σενάριο για συζήτηση</p>
+    <p class="scase">Ένα παιδί κάνει tap νωρίς σε κάθε randori και οι συμμαθητές του αρχίζουν να το πειράζουν. Τι κάνεις;</p>
+    <details>
+      <summary>Δες μια πιθανή απάντηση</summary>
+      <p class="sanswer">Παρεμβαίνεις άμεσα στο πείραγμα. Δεν είναι «αστείο», είναι υπονόμευση της ίδιας της κουλτούρας ασφάλειας που χτίζεις. Χρησιμοποίησε τη στιγμή για να υπενθυμίσεις σε όλη την τάξη ότι το γρήγορο tap είναι δείγμα ωριμότητας, όχι αδυναμίας.</p>
+    </details>
+  </div>
+</section>
+
+<section>
+  <p class="checkpoint-kicker">⏸ Στάσου και σκέψου</p>
+  <div class="quiz" id="q3">
+    <p class="q-num">Έλεγχος κατανόησης</p>
+    <p class="q-text">Ένα παιδί αποφεύγει να κάνει tap λόγω πίεσης συνομηλίκων. Αυτό είναι αποτέλεσμα:</p>
+    <button class="opt" data-correct="false">Καλής αγωνιστικής νοοτροπίας</button>
+    <button class="opt" data-correct="true">Έλλειψης ψυχολογικής ασφάλειας στην ομάδα</button>
+    <button class="opt" data-correct="false">Φυσιολογικής παιδικής συμπεριφοράς που δεν χρειάζεται παρέμβαση</button>
+    <div class="feedback"></div>
+  </div>
+</section>
+
+<section class="content-block" id="erevna">
+  <p class="kicker">Πλαίσιο</p>
+  <h2>Τι λένε οι επίσημοι φορείς</h2>
+  <ul class="points">
+    <li>Η IJF Judo for Children Commission δίνει σαφείς οδηγίες ηλικιακής προσαρμογής στην ασφάλεια: από τον εξοπλισμό έως τον τρόπο διδασκαλίας.</li>
+    <li>Από το 2022, η IJF έχει πιστοποιημένους Safeguarding Officers (σε συνεργασία με τη ΔΟΕ) αφιερωμένους στην προστασία παιδιών και ευάλωτων αθλητών.</li>
+    <li>Η ακαδημαϊκή έρευνα (Owusu-Sekyere, Rhind &amp; Hills, 2022) περιγράφει την «κουλτούρα προστασίας» στον αθλητισμό ως κάτι δυναμικό και όχι μια λίστα κανόνων, αλλά μια σχέση παραγόντων που ενισχύζονται ή αποδυναμώνονται αμοιβαία.</li>
+  </ul>
+  <details class="nuance">
+    <summary><span class="mark">🎓</span> Γιατί έχει σημασία για έναν προπονητή</summary>
+    <div class="nuance-body">
+      <p>Η ασφάλεια στο παιδικό judo/BJJ δεν είναι προσωπική επιλογή. Υπάρχει διεθνές πλαίσιο πίσω της, με επίσημους φορείς, πιστοποιήσεις και ακαδημαϊκή έρευνα. Το να γνωρίζεις αυτό το πλαίσιο σε βοηθάει σε καταστάσεις όπου χρειάζεται να εξηγήσεις μια απόφασή σου σε γονείς ή συναδέλφους.
+      <span class="src">IJF.org, «The IJF is Ready for Safe Sport for All» (2022) · IJF Judo in Schools Toolkit · Owusu-Sekyere, Rhind &amp; Hills (2022), Sport Management Review</span></p>
+    </div>
+  </details>
+</section>
+
+<div class="discussion">
+  <h2>Πώς φαίνεται η ασφάλεια στην πράξη;</h2>
+
+  <p class="prompt-label">Επιλογή Α</p>
+  <p class="prompt">«Πώς κάνετε το δικό σας "tap talk"; Τι λέτε, πόσο συχνά το επαναλαμβάνετε;»</p>
+
+  <p class="prompt-label">Επιλογή Β</p>
+  <p class="prompt">«Θυμηθείτε μια φορά που ένα παιδί δυσκολεύτηκε συναισθηματικά μετά από μια ρίψη ή ένα submission. Πώς αντιδράσατε;»</p>
+
+  <p class="prompt-label">Επιλογή Γ</p>
+  <p class="prompt">«Πώς αντιμετωπίζετε το πείραγμα ή τη γελοιοποίηση ανάμεσα σε παιδιά μέσα στην τάξη;»</p>
+
+  <div class="step"><span class="snum">1</span><p>Σχηματισμός μικρών ομάδων (3–4 άτομα).</p></div>
+  <div class="step"><span class="snum">2</span><p>Κάθε ομάδα καταγράφει 2 παραδείγματα από τη δική της εμπειρία.</p></div>
+  <div class="step"><span class="snum">3</span><p>Σύντομη παρουσίαση &amp; κοινή συζήτηση στην ολομέλεια.</p></div>
+
+  <div class="keywords">
+    <p class="kw-title">Λέξεις-κλειδιά για να κρατήσετε τη συζήτηση εστιασμένη</p>
+    <div class="kw-list">
+      <span class="kw-chip">ukemi</span>
+      <span class="kw-chip">tap</span>
+      <span class="kw-chip">ψυχολογική ασφάλεια</span>
+      <span class="kw-chip">όριο συναθλητή</span>
+      <span class="kw-chip">Jita Kyoei</span>
+      <span class="kw-chip">εμπιστοσύνη</span>
+      <span class="kw-chip">κουλτούρα τάξης</span>
+      <span class="kw-chip">ρόλος προπονητή</span>
+    </div>
+  </div>
+</div>
+
+<section id="faq">
+  <h2>Συχνές Ερωτήσεις</h2>
+  <div class="faqs">
+
+    <details class="faq-item">
+      <summary>Πόσος χρόνος πρέπει να αφιερώνεται στο ukemi πριν από το πρώτο randori;</summary>
+      <div class="faq-body">
+        <p>Δεν υπάρχει ενιαίος αριθμός μαθημάτων. Εξαρτάται από την ηλικία και την ατομική πρόοδο κάθε παιδιού. Ο κανόνας είναι ποιοτικός, όχι χρονικός: ένα παιδί περνά σε randori μόνο όταν εκτελεί τα βασικά ukemi με σταθερότητα και χωρίς δισταγμό, όχι όταν περάσει ένας προκαθορισμένος αριθμός μαθημάτων.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Τι κάνω αν ένα παιδί δεν κάνει ποτέ tap, ακόμα κι όταν πονάει;</summary>
+      <div class="faq-body">
+        <p>Αυτό είναι σημάδι ότι το tap talk δεν έχει «περάσει» ακόμα, ή ότι υπάρχει κοινωνική πίεση να μη φανεί αδύναμο. Χρειάζεται ατομική συζήτηση εκτός τάξης, επανάληψη του μηνύματος, και ίσως προσωρινή μείωση της έντασης στα ζευγάρια του συγκεκριμένου παιδιού μέχρι να χτιστεί η συνήθεια.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Πώς ζευγαρώνω παιδιά με μεγάλη διαφορά μεγέθους ή εμπειρίας;</summary>
+      <div class="faq-body">
+        <p>Ιδανικά, με βάση μέγεθος και εμπειρία, όχι μόνο ηλικία. Όταν η διαφορά είναι αναπόφευκτη (μικρές ομάδες), ο πιο έμπειρος/μεγαλύτερος αναλαμβάνει ρητά τον ρόλο του «να προσέχει». Αυτό διδάσκεται και επιβραβεύεται, δεν που θεωρείται δεδομένο.</p>
+      </div>
+    </details>
+
+  </div>
+</section>
+
+<section>
+  <h2>Πηγές</h2>
+  <div class="sources">
+
+    <div class="source-item">
+      <span class="snum2">01</span>
+      <div class="sbody">
+        <a href="https://www.ijf.org/news/show/the-ijf-is-ready-for-safe-sport-for-all" target="_blank" rel="noopener">The IJF is Ready for Safe Sport for All</a>
+        <span class="spublisher">IJF.org, 2022</span>
+        <span class="snote">Η θεσμοθέτηση των IJF Safeguarding Officers και ο ορισμός του safeguarding στον αθλητισμό.</span>
+      </div>
+    </div>
+
+    <div class="source-item">
+      <span class="snum2">02</span>
+      <div class="sbody">
+        <a href="https://schools.ijf.org/method" target="_blank" rel="noopener">IJF Judo in Schools - Method</a>
+        <span class="spublisher">IJF Judo for Children Commission</span>
+        <span class="snote">Οδηγίες ηλικιακής προσαρμογής και παιδαγωγική μεθοδολογία για το judo σε παιδιά.</span>
+      </div>
+    </div>
+
+    <div class="source-item">
+      <span class="snum2">03</span>
+      <div class="sbody">
+        <a href="https://doi.org/10.1080/14413523.2021.1930951" target="_blank" rel="noopener">Safeguarding culture: towards a new approach to preventing child maltreatment in sport</a>
+        <span class="spublisher">Owusu-Sekyere, Rhind &amp; Hills (2022), Sport Management Review</span>
+        <span class="snote">Ακαδημαϊκό μοντέλο «κουλτούρας προστασίας» στον αθλητισμό.</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="ask">
+  <h2>Έχεις απορία για αυτή την ενότητα;</h2>
+  <p class="sub2">Άφησέ την εδώ ανώνυμα. Θα τις διαβάσω όλες πριν το επόμενο μάθημα και θα ξεκινήσουμε με τις απαντήσεις.</p>
+  <div class="form-frame-holder">
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdvrMXgqSWPx89b0vqXCfCyniSNB5FCv4_z3V0q9hJXc1Pf7A/viewform?usp=dialog">Loading…</iframe>
+  </div>
+</section>
+
+<div class="closing">
+  <p class="next-label">Επόμενη ενότητα</p>
+  <p class="next-title">Σχεδιασμός Ασφαλούς Προπονητικής Μονάδας</p>
+</div>
+</div>
+
+<footer class="pagefoot">ΕΝΟΤΗΤΑ 2 · ΑΡΧΕΣ ΑΣΦΑΛΕΙΑΣ ΣΤΟ ΠΑΙΔΙΚΟ ΤΖΟΥΝΤΟ – ΖΙΟΥ ΖΙΤΣΟΥ</footer>
+
+<script>
+  document.querySelectorAll('.quiz').forEach(function(quiz){
+    var opts = quiz.querySelectorAll('.opt');
+    var feedback = quiz.querySelector('.feedback');
+    var answered = false;
+    opts.forEach(function(opt){
+      opt.addEventListener('click', function(){
+        if(answered) return;
+        answered = true;
+        var isCorrect = opt.getAttribute('data-correct') === 'true';
+        opts.forEach(function(o){
+          o.disabled = true;
+          if(o.getAttribute('data-correct') === 'true'){
+            o.classList.add('correct');
+          } else if(o === opt && !isCorrect){
+            o.classList.add('incorrect');
+          }
+        });
+        feedback.textContent = isCorrect
+          ? "Σωστά! Ακριβώς αυτό."
+          : "Όχι ακριβώς. Η σωστή επιλογή είναι τονισμένη παραπάνω.";
+        feedback.className = 'feedback show ' + (isCorrect ? 'ok' : 'no');
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
